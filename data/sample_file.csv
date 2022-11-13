@@ -1,12 +1,12 @@
-# amount (float),  currency (enum), project (string), category (string), description (string), expense (boolean), date (yyyy, mm, dd)
-3000, 3, 'South Korea', 'Food', 'Gimbap', True, 2022 09 06
-7, 2, 'Daily Life', 'Clothing', 'Socks', True,  2022 10 04
-3.2, 2, 'Daily Life', 'Food', 'Spicy Pumpkin Latte', True, 2022 11 13
-400, 2, 'South Korea', 'Transport', 'Flight Tickets to Jeju-do', True, 2022 09 08
-350, 1, 'Daily Life', 'Housing', 'November rent', True, 2021 12 06
-7200, 3, 'South Korea', 'Travelling', 'Temple entrance fee', True, 2022 09 17
-12700, 3, 'South Korea', 'Food', 'Lemon soju', True, 2022 09 26
-1.5, 2, 'Daily Life', 'Others', 'Post card to grandma Marion', True, 2022 09 11
-90, 2, 'Ski Trip', 'Others', 'Ski rental', True, 2022 10 29
-537, 2, 'Ski Trip', 'Transport', 'Car rental', True, 2022 11 05
-37, 1, 'South Korea', 'Health', 'November Health Insurance', True, 2022 11 28
+#amount(float),currency(enum),project(string),category(string),description(string),expense(boolean),date(yyyymmdd)
+3000,3,South Korea,Food,Gimbap,True,20220906
+7,2,Daily Life,Clothing,Socks,True,20221004
+3.2,2,Daily Life,Food,Spicy Pumpkin Latte,True,20221113
+400,2,South Korea,Transport,Flight Tickets to Jeju-do,True,20220908
+350,1,Daily Life,Housing,November rent,True,20211206
+7200,3,South Korea,Travelling,Temple entrance fee,True,20220917
+12700,3,South Korea,Food,Lemon soju,True,20220926
+1.5,2,Daily Life,Others,Post card to grandma Marion,True,20220911
+90,2,Ski Trip,Others,Ski rental,True,20221029
+537,2,Ski Trip,Transport,Car rental,True,20221105
+37,1,South Korea,Health,November Health Insurance,True,20221128
