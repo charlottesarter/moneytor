@@ -1,3 +1,4 @@
+import Currency
 class Finance:
 
     def __init__(self, amount, currency, project, category, description, expense, date):
@@ -8,9 +9,20 @@ class Finance:
         self.description = description
         self.expense = expense
         self.date = date
+
+    def asInFile(self):
+        return self.amount + ',' + self.currency + ',' + self.project + ',' + self.category + ',' + self.description + ',' + self.expense + ',' + self.date
     
     def __str__(self):
-        return self.amount # TODO: Nice display of the object
+
+        expense = ''
+
+        if self.expense == True:
+            expense = '+'
+        else:
+            expense = '-'
+
+        return 'Amount : ' + expense + self.amount + '\nCurrency : ' + self.currency.name + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date  
 
     def create():
         amount_new = float(input('Please input the amount: '))
@@ -22,3 +34,15 @@ class Finance:
 
     def add(new_finance):
         print('bla')
+
+    def delete(finance, path):
+
+        with open(path, "r") as fp:
+            lines = fp.readlines()
+        
+        with open(path, "w") as fp:
+            for line in lines:
+                if line.strip("\n") != finance.asInFile():
+                    fp.write(line)
+
+
