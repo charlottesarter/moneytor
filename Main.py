@@ -1,8 +1,5 @@
 from Finance import Finance
 
-while True:
-    Finance.create()
-
 def read():
     f = open('data/sample_file.csv', 'r')
     while True:
@@ -19,4 +16,11 @@ def read():
             break
         # print(line)
     f.close()
+
+while True:
+    new_object = Finance.create()
+    Finance.add(new_object, 'data/sample_file.csv')
+    read()
+
+
 
