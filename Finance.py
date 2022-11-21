@@ -24,18 +24,28 @@ class Finance:
         else:
             expense = '-'
 
-        return 'Amount : ' + expense + self.amount + '\nCurrency : ' + self.currency + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date
+        cur = 'upsiiis'            # to show currency behind the amount
+        if self.currency == str(Currency['EUR'].value):
+            cur = '€'
+        elif self.currency == str(Currency['KRW'].value):
+            cur = 'W'
+        elif self.currency == str(Currency['USD'].value):
+            cur = '$'
 
+        #return 'Amount : ' + expense + self.amount + ' ' + cur + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date
+        return 'Amount : ' + expense + self.amount + ' ' + cur + '\nDescription : ' + self.project + ' --> ' + self.category + ' --> ' + self.description + '\nDate : ' + self.date
     def create():
         amount_new = float(input('Please input the amount: '))
 
         currency_new = 0
         while(not(currency_new)):
             currency_new = str(input('please input the currency: '))
-            if(currency_new == 'won'):
+            if(currency_new.lower() == 'won'):
                 currency_new = Currency['KRW'].value    #to store the value of the currency
-            elif(currency_new == 'eur'):
+            elif(currency_new.lower() == 'eur' or currency_new.lower() == 'euro'):
                 currency_new = Currency['EUR'].value
+            elif(currency_new.lower() == 'usd' or currency_new.lower() == 'dollar'):
+                currency_new = Currency['USD'].value
             else:
                 print('Unfortunately the selected currency is not supported yet. We are working hard to implement it as fast as possible')
                 print('Please input a valid currency')
@@ -48,7 +58,7 @@ class Finance:
         expense_new = 2
         while(expense_new == 2):
             expense_new = str(input('please input (0) for income or (1) for an expense: '))
-            if(int(expense_new) == (0 or 1)):
+            if(int(expense_new) == 0 or int(expense_new) == 1):
                 expense_new = bool(expense_new)
             else:
                 print('The input was not valid')
@@ -58,10 +68,8 @@ class Finance:
         date_new = today.strftime("%Y%m%d")
             
         new_finance = Finance(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new)
-        
         #if(new_finance.isinstance()):
         #    print('New Object has been created')   #TODO check if object was created successfully
-
         return new_finance
 
 
