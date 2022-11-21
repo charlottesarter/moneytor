@@ -11,9 +11,20 @@ class Finance:
         self.description = description
         self.expense = expense
         self.date = date
+
+    def asInFile(self):
+        return self.amount + ',' + self.currency + ',' + self.project + ',' + self.category + ',' + self.description + ',' + self.expense + ',' + self.date
     
     def __str__(self):
-        return self.amount # TODO: Nice display of the object
+
+        expense = ''
+
+        if self.expense == True:
+            expense = '+'
+        else:
+            expense = '-'
+
+        return 'Amount : ' + expense + self.amount + '\nCurrency : ' + self.currency.name + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date  
 
     def create():
         amount_new = float(input('Please input the amount: '))
@@ -57,3 +68,13 @@ class Finance:
     def add(new_finance, path):
         f = open(path, 'a') #'a' for append; 'w' will overwrite the existing data
         f.write('\n' + str(new_finance.amount) + ',' + str(new_finance.currency) + ',' + str(new_finance.project) + ',' + str(new_finance.category) + ',' + str(new_finance.description) + ',' + str(new_finance.expense) + ',' + str(new_finance.date))
+
+    def delete(finance, path):
+
+        with open(path, "r") as fp:
+            lines = fp.readlines()
+        
+        with open(path, "w") as fp:
+            for line in lines:
+                if line.strip("\n") != finance.asInFile():
+                    fp.write(line)
