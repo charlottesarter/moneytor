@@ -1,10 +1,7 @@
 from Finance import Finance
 
-while True:
-    Finance.create()
-
-def read():
-    f = open('data/sample_file.csv', 'r')
+def read(path):
+    f = open(path, 'r')
     while True:
         line = f.readline() # Read a line sequentially
         values = line.split(',')
@@ -17,6 +14,16 @@ def read():
 
         if not line:
             break
-        # print(line)
+        
     f.close()
+
+def main():
+
+    path = 'data/sample_file.csv'
+
+    read(path)
+
+if __name__=="__main__":
+    main()
+
 
