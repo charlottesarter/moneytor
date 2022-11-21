@@ -11,7 +11,8 @@ class Finance:
     
     def __str__(self):
         return self.amount # TODO: Nice display of the object
-        
+
+    
 
 
     
