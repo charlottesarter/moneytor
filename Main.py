@@ -1,5 +1,6 @@
 from Finance import Finance
 from enum import Enum
+from Users import Users
 
 class Menu(Enum):
     ADD = 1
@@ -25,8 +26,16 @@ def read(path):
     f.close()
 
 def main():
-    path = 'data/sample_file.csv'
+    path_data = 'data/sample_file.csv'
+    path_users = 'data/users.csv'
     while True:
+
+        # ---- ---- ---- Log In / Sign In ---- ---- ----
+        #Users.log_in(path_users)
+
+
+
+
         # ---- ---- ---- Menu ---- ---- ----
         print('---- ---- Welcome to MONEYTOR! ---- ----')
         print('The software that makes your life easier')
@@ -42,12 +51,12 @@ def main():
         
         if(int(userInput) == 1):     #ADD
             new_obj = Finance.create()
-            Finance.add(new_obj, path)
+            Finance.add(new_obj, path_data)
         elif(int(userInput) == 2):     #DELETE
             obj = new_obj #TODO put in the correct object to delete please:)
             # Finance.delete(obj, path) #TODO uncomment; didnt want to fuck something up
         elif(int(userInput) == 3):     #VIEW LIST
-            read(path)
+            read(path_data)
         else:
             print('A mysterious error occured...sorry:/')
 
