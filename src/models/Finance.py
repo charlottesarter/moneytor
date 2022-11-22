@@ -12,6 +12,7 @@ class Finance:
         self.expense = expense
         self.date = date
 
+    # Return a finance the way it should be in the csv file
     def asInFile(self):
         return self.amount + ',' + self.currency + ',' + self.project + ',' + self.category + ',' + self.description + ',' + self.expense + ',' + self.date
 
