@@ -1,6 +1,6 @@
-from models.Finance import Finance
+from models.Transaction import Transaction
 from enum import Enum
-from models.Users import Users
+from models.User import Users
 import tkinter as tk
 from tkinter import ttk
 
@@ -20,7 +20,7 @@ def read(path):
         if values[0] == '':
             print('End of the data')
         else:
-            finance = Finance(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
+            finance = Transaction(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
             print(finance)
 
         if not line:
@@ -54,11 +54,11 @@ def main():
                         userInput = 0
                 
                 if(int(userInput) == 1):     #ADD
-                    new_obj = Finance.create()
-                    Finance.add(new_obj, path_data)
+                    new_obj = Transaction.create()
+                    Transaction.add(new_obj, path_data)
                 elif(int(userInput) == 2):     #DELETE
                     obj = new_obj #TODO put in the correct object to delete please:)
-                    # Finance.delete(obj, path) #TODO uncomment; didnt want to fuck something up
+                    # Transaction.delete(obj, path) #TODO uncomment; didnt want to fuck something up
                 elif(int(userInput) == 3):     #VIEW LIST
                     read(path_data)
                 elif(int(userInput) == 4):     #Log out
@@ -222,7 +222,7 @@ def login_interface():
         
         label_welcome = tk.Label(frame_startpage, text='----> ----> Welcome to Moneytor <---- <----', font=('Times New Roman', 15))
         label_welcome.pack()
-        label_start_1 = tk.Label(frame_startpage, text='To see your Finances please log in first', font=('Times New Roman', 10))
+        label_start_1 = tk.Label(frame_startpage, text='To see your Transactions please log in first', font=('Times New Roman', 10))
         label_start_1.pack()
         
         button_login = tk.Button(frame_startpage, text='Log in', command=login)

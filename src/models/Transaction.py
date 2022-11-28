@@ -1,7 +1,7 @@
 from models.Currency import Currency
 from datetime import date
 
-class Finance:
+class Transaction:
 
     def __init__(self, amount, currency, project, category, description, expense, date):
         self.amount = amount
@@ -68,7 +68,7 @@ class Finance:
         today = date.today()
         date_new = today.strftime("%Y%m%d")
             
-        new_finance = Finance(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new)
+        new_finance = Transaction(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new)
         #if(new_finance.isinstance()):
         #    print('New Object has been created')   #TODO check if object was created successfully
         return new_finance
