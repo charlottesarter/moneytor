@@ -12,6 +12,11 @@ class App(tk.Tk):
         self.title('Tkinter MVC Demo')
 
         # create a model
+        
+        
+        # TODO What is this model for?
+        
+        
         model = User('max_eberlein', 'ILikeIt', 3)
 
         # create a view and place it on the root window
@@ -28,3 +33,5 @@ class App(tk.Tk):
 if __name__ == '__main__':
     app = App()
     app.mainloop()
+    
+#TODO how do we handle, if the whole page changes, for example for signup when we click next after each step?
