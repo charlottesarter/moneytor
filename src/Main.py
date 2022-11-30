@@ -1,6 +1,8 @@
 from models.Transaction import Transaction
 from enum import Enum
-from models.User import Users
+
+
+from models.User import User
 import tkinter as tk
 from tkinter import ttk
 
@@ -38,10 +40,10 @@ def main():
         print('The software that makes your life easier')
         start_input = input('Do you want to log in (L) or Sign up (S)?')
         if(start_input.lower() == 's'):
-            new_user = Users.sign_up()
-            Users.add(new_user, path_users)
+            new_user = User.sign_up()
+            User.add(new_user, path_users)
         elif(start_input.lower() == 'l'):
-            if(Users.log_in(path_users) == True):
+            if(User.log_in(path_users) == True):
                 # ---- ---- ---- Menu ---- ---- ----
                 print('What to you want to do:\n(1) Add an expense/income\n(2) Delete an expense/income\n(3) View your balance\n(4) Log out')
                 userInput = 0
@@ -69,8 +71,8 @@ def main():
                 print('log in was not successfull.')
                 userInput = input('Do you want to sign up? (Y/N): ')
                 if(userInput.lower() == 'y'):
-                    new_user = Users.sign_up()      #TODO not nice that there are 2 points in the code where you can sign up...
-                    Users.add(new_user, path_users)
+                    new_user = User.sign_up()      #TODO not nice that there are 2 points in the code where you can sign up...
+                    User.add(new_user, path_users)
                 else:
                     print('What a pitty... :/\n But you are welcome again any time if you change your mind:)')
                     break

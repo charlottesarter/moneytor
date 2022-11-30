@@ -2,7 +2,14 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
-class LoginView(ttk.Frame):
+import sys
+
+# setting path
+sys.path.append('../models')
+
+from models.Currency import Currency
+
+class RegisterView(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -11,14 +18,14 @@ class LoginView(ttk.Frame):
         self.label = ttk.Label(self, text='Username:')
         self.label.grid(row=1, column=0)
 
-        # password
-        self.label = ttk.Label(self, text='Password:')
-        self.label.grid(row=2, column=0)
-
         # username entry
         self.username_var = tk.StringVar()
         self.username_entry = ttk.Entry(self, textvariable=self.username_var, width=30)
         self.username_entry.grid(row=1, column=1, sticky=tk.NSEW)
+
+        # password
+        self.label = ttk.Label(self, text='Password:')
+        self.label.grid(row=2, column=0)
 
         # password entry
         self.password_var = tk.StringVar()
@@ -30,9 +37,13 @@ class LoginView(ttk.Frame):
         self.label.grid(row=3, column=0)
 
         # currency entry
-        self.currency_var = tk.StringVar()
-        self.currency_entry = ttk.Entry(self, textvariable=self.currency_var, width=30)
-        self.currency_entry.grid(row=3, column=1, sticky=tk.NSEW)
+        self.currency_var = tk.IntVar()
+        self.eur = ttk.Radiobutton(self, text='EUR', variable=self.currency_var, value=Currency['EUR'].value)
+        self.krw = ttk.Radiobutton(self, text='KRW', variable=self.currency_var, value=Currency['KRW'].value)
+        self.usd = ttk.Radiobutton(self, text='USD', variable=self.currency_var, value=Currency['USD'].value)
+        self.eur.grid(row=3, column=1)
+        self.krw.grid(row=3, column=2)
+        self.usd.grid(row=3, column=3)
 
         # save button
         self.save_button = ttk.Button(self, text='Save', command=self.save_button_clicked)
@@ -89,7 +100,7 @@ class LoginView(ttk.Frame):
         self.password_entry['foreground'] = 'black'
         self.password_var.set('')
 
-        self.currency_entry['foreground'] = 'black'
+        # self.currency_entry['foreground'] = 'black'
         self.currency_var.set('')
 
     def hide_message(self):
