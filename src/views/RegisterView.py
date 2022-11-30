@@ -1,17 +1,20 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, Toplevel
 from tkinter.messagebox import showinfo
 
-import sys
+# import sys
 
-# setting path
-sys.path.append('../models')
+# # setting path
+# sys.path.append('../models')
 
-from models.Currency import Currency
+# from models.Currency import Currency
 
 class RegisterView(ttk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self):
+
+        self = Toplevel()
+
+        print('yoooo')
 
         # create widgets
         # username
@@ -38,9 +41,9 @@ class RegisterView(ttk.Frame):
 
         # currency entry
         self.currency_var = tk.IntVar()
-        self.eur = ttk.Radiobutton(self, text='EUR', variable=self.currency_var, value=Currency['EUR'].value)
-        self.krw = ttk.Radiobutton(self, text='KRW', variable=self.currency_var, value=Currency['KRW'].value)
-        self.usd = ttk.Radiobutton(self, text='USD', variable=self.currency_var, value=Currency['USD'].value)
+        self.eur = ttk.Radiobutton(self, text='EUR', variable=self.currency_var, value=1) # Currency['EUR'].value
+        self.krw = ttk.Radiobutton(self, text='KRW', variable=self.currency_var, value=2)
+        self.usd = ttk.Radiobutton(self, text='USD', variable=self.currency_var, value=3)
         self.eur.grid(row=3, column=1)
         self.krw.grid(row=3, column=2)
         self.usd.grid(row=3, column=3)

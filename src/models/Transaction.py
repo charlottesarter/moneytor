@@ -35,6 +35,25 @@ class Transaction:
 
         #return 'Amount : ' + expense + self.amount + ' ' + cur + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date
         return 'Amount : ' + expense + self.amount + ' ' + cur + '\nDescription : ' + self.project + ' --> ' + self.category + ' --> ' + self.description + '\nDate : ' + self.date
+
+    def initialize(path):
+
+        f = open(path, 'r')
+        while True:
+            line = f.readline() # Read a line sequentially
+            values = line.split(',')
+
+            if values[0] == '':
+                print('End of the data')
+            else:
+                finance = Transaction(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
+                print(finance)
+
+            if not line:
+                break
+            
+        f.close()
+
     def create():
         amount_new = float(input('Please input the amount: '))
 
