@@ -1,4 +1,4 @@
-from Currency import Currency
+from models.Currency import Currency
 from datetime import date
 
 class Transaction:
