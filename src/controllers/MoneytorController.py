@@ -5,12 +5,14 @@ class MoneytorController:
         self.view = view
     
     def login(self):
-        self.view.login()
+        self.view.show_login()
+        print('login was pressed')
         
-    def signup(self):
-        self.view.signup()
+    def register(self):
+        self.view.show_register()
+        print('register was pressed')
         
     def start_moneytor(self):
-        self.view.start_page()
+        self.view.start_moneytor()
         
     

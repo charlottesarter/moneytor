@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, Menu
 
 from models.Transaction import Transaction
 from views.MenuView import MenuView
@@ -9,13 +9,17 @@ from controllers.MoneytorController import MoneytorController
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
+        
+        print('Ola')
 
         self.title('Moneytor')
 
         # create a model    
         path_data = 'data/sample_file.csv'
         model = Transaction.initialize(path_data)
-
+        
+        print('Pipiundkackaimpipiundkackaland')
+        
         # create a view and place it on the root window
         view = WelcomeView(self)
         view.grid(row=0, column=0, padx=10, pady=10)
@@ -25,6 +29,8 @@ class App(tk.Tk):
 
         # set the controller to view
         view.set_controller(controller)
+        
+        print('GuMo')
 
 
 if __name__ == '__main__':
