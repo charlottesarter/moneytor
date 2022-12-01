@@ -29,3 +29,5 @@ class App(tk.Tk):
 if __name__ == '__main__':
     app = App()
     app.mainloop()
+    
+#TODO how do we handle, if the whole page changes, for example for signup when we click next after each step?
