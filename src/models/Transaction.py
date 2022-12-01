@@ -1,4 +1,4 @@
-from models.Currency import Currency
+from Currency import Currency
 from datetime import date
 
 class Transaction:
@@ -91,6 +91,10 @@ class Transaction:
         #if(new_finance.isinstance()):
         #    print('New Object has been created')   #TODO check if object was created successfully
         return new_finance
+    
+    def create(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new):
+        new_finance = Transaction(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new)
+        return new_finance  
 
 
     def add(new_finance, path):
