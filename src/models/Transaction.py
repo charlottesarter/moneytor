@@ -47,7 +47,7 @@ class Transaction:
                 print('End of the data')
             else:
                 finance = Transaction(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
-                print(finance)
+                #print(finance)
 
             if not line:
                 break
