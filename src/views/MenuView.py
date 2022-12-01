@@ -24,7 +24,7 @@ class MenuView(ttk.Frame):
     homepage_menu.add_command(label='Open...')
     homepage_menu.add_command(label='Close')
     homepage_menu.add_separator()
-
+    
     # add Exit menu item
     homepage_menu.add_command(
         label='Exit',

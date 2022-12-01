@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from models.Transaction import Transaction
 from views.MenuView import MenuView
+from views.WelcomeView import WelcomeView
 from controllers.MoneytorController import MoneytorController
 
 class App(tk.Tk):
@@ -11,12 +12,12 @@ class App(tk.Tk):
 
         self.title('Moneytor')
 
-        # create a model
+        # create a model    
         path_data = 'data/sample_file.csv'
         model = Transaction.initialize(path_data)
 
         # create a view and place it on the root window
-        view = MenuView(self)
+        view = WelcomeView(self)
         view.grid(row=0, column=0, padx=10, pady=10)
 
         # create a controller
