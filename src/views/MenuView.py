@@ -1,13 +1,80 @@
 import tkinter as tk
 from tkinter import Tk, Frame, Menu, ttk
 
-class MenuView(ttk.Frame):
+class MenuView():
+
+    frames = {}
+
+    def showVizualize():
+        print('bla')
 
     # root window
     root = Tk()
-    root.geometry('320x150')
+    root.geometry('800x300')
     root.title('Moneytor')
 
+    # create default frame
+    frame_default = tk.Frame(root)
+    frames['default'].append(frame_default)
+
+    label_default = tk.Label(frame_default, text='What\'s new today?')
+    label_default.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
+
+    # create widgets
+    # project
+    label_project = ttk.Label(frame_default, text='Project')
+    label_project.grid(column=0, row=1, sticky=tk.N, columnspan=4, padx=5, pady=5)
+
+    # project entry
+    project_var = tk.StringVar()
+    project_entry = ttk.Entry(frame_default, textvariable=project_var, width=30)
+    project_entry.grid(column=0, row=2, sticky=tk.N, columnspan=4, padx=5, pady=5)
+
+    # category
+    label_category = ttk.Label(frame_default, text='Category')
+    label_category.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
+
+    # category entry
+    category_var = tk.StringVar()
+    category_entry = ttk.Entry(frame_default, textvariable=category_var, width=30)
+    category_entry.grid(column=0, row=4, sticky=tk.E, padx=5, pady=5)
+
+    # description
+    label_description = ttk.Label(frame_default, text='Description')
+    label_description.grid(column=1, row=3, sticky=tk.N, padx=5, pady=5)
+
+    # category entry
+    description_var = tk.StringVar()
+    description_entry = ttk.Entry(frame_default, textvariable=category_var, width=30)
+    description_entry.grid(column=1, row=4, sticky=tk.E, padx=5, pady=5)
+
+    # amount
+    label_amount = ttk.Label(frame_default, text='Amount')
+    label_amount.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
+
+    # amount entry
+    amount_var = tk.StringVar()
+    amount_entry = ttk.Entry(frame_default, textvariable=category_var, width=30)
+    amount_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
+
+    # currency
+    label_currency = ttk.Label(frame_default, text='Currency')
+    label_currency.grid(column=3, row=3, sticky=tk.N, padx=5, pady=5)
+
+    # currency entry
+    currency_var = tk.IntVar()
+    currency_entry = ttk.Entry(frame_default, textvariable=currency_var, width=30)
+    currency_entry.grid(column=3, row=4, sticky=tk.E, padx=5, pady=5)
+
+    # expense button
+    expense_button = ttk.Button(frame_default, text='Expense') # TODO : define the command of the button 
+    expense_button.grid(column=0, row=6, sticky=tk.S, columnspan=4, padx=5, pady=30)
+
+    # income button
+    income_button = ttk.Button(frame_default, text='Income') # TODO : define the command of the button 
+    income_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=5)
+            
+    frame_default.pack()
 
     # create a menubar
     menubar = Menu(root)
