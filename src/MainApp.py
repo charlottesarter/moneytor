@@ -39,9 +39,21 @@ if __name__ == '__main__':
     for user in users:
         print(user)
 
+    # Create root window of the app
+
+    root = tk.Tk()
+    root.geometry('320x200')
+    root.title('Moneytor')
+
+
+    # Show the first view : the welcome page
+
+    WelcomeView.showWelcomeView(root)
+
     # welcomeView.showView() --> mettre le code dans showView()
     
     # app = App()
     # app.mainloop()
+    root.mainloop()
     
 #TODO how do we handle, if the whole page changes, for example for signup when we click next after each step?

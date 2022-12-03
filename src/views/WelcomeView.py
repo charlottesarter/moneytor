@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, Tk, Toplevel
+from tkinter import ttk, Toplevel
 from tkinter.messagebox import showinfo
 
 import sys
@@ -8,10 +8,8 @@ import sys
 sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers')
 sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
 
-import RegisterController
-import User
 from ModelMoneytor import ModelMoneytor
-# from controllers.RegisterController import RegisterController
+from views.HomePageView import HomePageView
 
 # If the user click on the 'register' button
 class RegisterWindow(Toplevel):
@@ -123,49 +121,109 @@ class RegisterWindow(Toplevel):
         :return:
         """
         self.message_label['text'] = ''
+
+class LoginView():
+
+    def __init__(self):
+
+        self.username = ''
+        self.password = ''
+
+
+    def showLoginView(self, root):
+
+        def login_button_clicked():
+
+            # Get username and password
+
+            self.username = getUsername()
+            self.password = getPassword()
+
+            model = ModelMoneytor()
+
+            # We go throught the list of users and check if the username and password entered by the user are in the database
+
+            for user in model.getAllUsers():
+                if user.username == self.username and user.password == self.password:
+
+                    model.user_logged = self.username
+
+                    # Destroy login frame
+                    frame_login.destroy()
+
+                    # Create homepage frame
+                    homepage_view = HomePageView()
+                    HomePageView.showHomePageView(homepage_view, root)
+
+
+        def getUsername():
+            return username_entry.get()
+
+        def getPassword():
+            return password_entry.get()
+
+        frame_login = tk.Frame(root)
+
+        label_welcome = tk.Label(frame_login, text='To see your transactions, please log in first')
+        label_welcome.grid(column=0, row=0, sticky=tk.EW, columnspan=2, padx=5, pady=5)
+
+        # username
+        label_username = ttk.Label(frame_login, text='Username:')
+        label_username.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+
+        # username entry
+        username = tk.StringVar()
+        username_entry = ttk.Entry(frame_login, textvariable=username, width=30)
+        username_entry.grid(column=1, row=1, sticky=tk.E, padx=5, pady=5)
+        print(username)
+
+        # password
+        label_password = ttk.Label(frame_login, text='Password:')
+        label_password.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+
+        # password entry
+        password = tk.StringVar()
+        password_entry = ttk.Entry(frame_login, textvariable=password, width=30)
+        password_entry.grid(column=1, row=2, sticky=tk.E, padx=5, pady=5)
+
+        # login button
+        login_button = ttk.Button(frame_login, text='Log in', command=login_button_clicked)
+        login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
+                
+        frame_login.pack()
+
+        
 class WelcomeView():
 
     def showWelcomeView(root):
 
-        # # Create root window
-
-        # root = Tk()
-        # root.geometry('320x200')
-        # root.title('Moneytor')
-
         # If the user click on the login button
 
         def login():
-            model_pipi = ModelMoneytor()
 
-            users = model_pipi.getAllUsers()
+            # Destroy frame_welcome
+            frame_welcome.destroy()
 
-            for user in users:
-                print(user)
-
-
-        # def register():
-            
-        #     registerWindow = Toplevel(root)
+            # Create login_frame
+            login_view = LoginView()
+            LoginView.showLoginView(login_view, root)
 
         # Start page
         
-        frame_login = tk.Frame(root)
+        frame_welcome = tk.Frame(root)
 
-        label_welcome = tk.Label(frame_login, text='Welcome to Moneytor', font=('Times New Roman', 15))
-        label_welcome.pack()
+        label_welcome = tk.Label(frame_welcome, text='Welcome to Moneytor')
+        label_welcome.grid(column=0, row=0, sticky=tk.EW, padx=5, pady=5)
 
-        label_start_1 = tk.Label(frame_login, text='To see your Transactions please log in first', font=('Times New Roman', 10))
-        label_start_1.pack()
+        label_start_1 = tk.Label(frame_welcome, text='To see your transactions, please log in first')
+        label_start_1.grid(column=0, row=1, sticky=tk.EW, padx=5, pady=5)
                 
-        button_login = tk.Button(frame_login, text='Log in', command=login)
-        button_login.pack()
+        button_login = tk.Button(frame_welcome, text='Log in', command=login)
+        button_login.grid(column=0, row=2, sticky=tk.N, padx=10, pady=10)
 
-        button_signup = tk.Button(frame_login, text='Register')
+        button_signup = tk.Button(frame_welcome, text='Register')
         button_signup.bind("<Button>", lambda e: RegisterWindow())
-        button_signup.pack()
+        button_signup.grid(column=0, row=3, sticky=tk.N, padx=10, pady=10)
                 
-        frame_login.pack()
-        
-        root.mainloop()
+        frame_welcome.pack()
 

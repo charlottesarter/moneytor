@@ -33,6 +33,8 @@ class ModelMoneytor(object):
             # line = line.rstrip()
             self.transactions.append(Transaction(line))
 
+        self.user_logged = ''
+
     # Make sure that there is only one model (singleton)
 
     def __new__(model):
