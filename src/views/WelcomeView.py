@@ -2,9 +2,16 @@ import tkinter as tk
 from tkinter import ttk, Tk, Toplevel
 from tkinter.messagebox import showinfo
 
-from RegisterView import RegisterView
+import sys
+
+# setting path
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers')
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+
+import RegisterController
+import User
+from ModelMoneytor import ModelMoneytor
 # from controllers.RegisterController import RegisterController
-# from models.User import User
 
 # If the user click on the 'register' button
 class RegisterWindow(Toplevel):
@@ -49,7 +56,7 @@ class RegisterWindow(Toplevel):
         self.krw.grid(row=3, column=1, sticky=tk.N, padx=5, pady=5)
         self.usd.grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
 
-        # save button
+        # register button
         self.register_button = ttk.Button(self, text='Register', command=self.register_button_clicked)
         self.register_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
 
@@ -58,7 +65,7 @@ class RegisterWindow(Toplevel):
         self.message_label.grid(column=0, row=4, sticky=tk.EW, columnspan=2, padx=5, pady=5)
 
         # set the controller
-        # self.controller = RegisterController(User('', '', ''), self)
+        # set_controller(RegisterController(User('', '', '')))
         self.controller = None
 
     def set_controller(self, controller):
@@ -118,40 +125,47 @@ class RegisterWindow(Toplevel):
         self.message_label['text'] = ''
 class WelcomeView():
 
-    # Create root window
+    def showWelcomeView(root):
 
-    root = Tk()
-    root.geometry('320x200')
-    root.title('Moneytor')
+        # # Create root window
 
-    # If the user click on the login button
+        # root = Tk()
+        # root.geometry('320x200')
+        # root.title('Moneytor')
 
-    def login():
-        login = Toplevel()
+        # If the user click on the login button
+
+        def login():
+            model_pipi = ModelMoneytor()
+
+            users = model_pipi.getAllUsers()
+
+            for user in users:
+                print(user)
 
 
-    # def register():
+        # def register():
+            
+        #     registerWindow = Toplevel(root)
+
+        # Start page
         
-    #     registerWindow = Toplevel(root)
+        frame_login = tk.Frame(root)
 
-    # Start page
-    
-    frame_login = tk.Frame(root)
+        label_welcome = tk.Label(frame_login, text='Welcome to Moneytor', font=('Times New Roman', 15))
+        label_welcome.pack()
 
-    label_welcome = tk.Label(frame_login, text='Welcome to Moneytor', font=('Times New Roman', 15))
-    label_welcome.pack()
+        label_start_1 = tk.Label(frame_login, text='To see your Transactions please log in first', font=('Times New Roman', 10))
+        label_start_1.pack()
+                
+        button_login = tk.Button(frame_login, text='Log in', command=login)
+        button_login.pack()
 
-    label_start_1 = tk.Label(frame_login, text='To see your Transactions please log in first', font=('Times New Roman', 10))
-    label_start_1.pack()
-            
-    button_login = tk.Button(frame_login, text='Log in', command=login)
-    button_login.pack()
-
-    button_signup = tk.Button(frame_login, text='Register')
-    button_signup.bind("<Button>", lambda e: RegisterWindow())
-    button_signup.pack()
-            
-    frame_login.pack()
-    
-    root.mainloop()
+        button_signup = tk.Button(frame_login, text='Register')
+        button_signup.bind("<Button>", lambda e: RegisterWindow())
+        button_signup.pack()
+                
+        frame_login.pack()
+        
+        root.mainloop()
 

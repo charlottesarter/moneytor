@@ -1,4 +1,4 @@
-from models.Currency import Currency
+# from models.Currency import Currency
 #import numpy as np
 #import pandas as pd
 
@@ -7,17 +7,20 @@ from models.Currency import Currency
 
 class User:
 
-    def __init__(self, username, password, pref_curr):
-        self.username = username
-        self.password = password
-        self.pref_curr = pref_curr
+    def __init__(self, line):
+       
+        infos = line.split(',')
+
+        self.username = infos[0]
+        self.password = infos[1]
+        self.prefered_currency = infos[2]
 
     def __str__(self):
-        return 'Username: ' + self.username + ', Password: ' + self.password + 'Preferred Currency: ' + self.pref_curr
+        return 'Username: ' + self.username + ', Password: ' + self.password + ', Preferred Currency: ' + str(self.prefered_currency)
 
     def save(self):
         with open('data/users.csv', 'a') as f:
-            f.write('\n' + self.username + ',' + self.password + ',' + self.pref_curr)
+            f.write('\n' + self.username + ',' + self.password + ',' + self.prefered_currency)
 
     # def sign_up():  #TODO check, that the person isn't signed up already
     #     print('-- WELCOME --\nPlease Start by creating an account')

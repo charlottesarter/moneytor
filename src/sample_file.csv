@@ -1,0 +1,12 @@
+#amount(float),currency(enum),project(string),category(string),description(string),expense(boolean),date(yyyymmdd)
+3000.0,3,South Korea,Food,Gimbap,True,20220906
+7.0,2,Daily Life,Clothing,Socks,True,20221004
+3.2,2,Daily Life,Food,Spicy Pumpkin Latte,True,20221113
+400.0,2,South Korea,Transport,Flight Tickets to Jeju-do,True,20220908
+350.0,1,Daily Life,Housing,November rent,True,20211206
+7200.0,3,South Korea,Travelling,Temple entrance fee,True,20220917
+12700.0,3,South Korea,Food,Lemon soju,True,20220926
+1.5,2,Daily Life,Others,Post card to grandma Marion,True,20220911
+90.0,2,Ski Trip,Others,Ski rental,True,20221029
+537.0,2,Ski Trip,Transport,Car rental,True,20221105
+37.0,1,South Korea,Health,November Health Insurance,True,20221128

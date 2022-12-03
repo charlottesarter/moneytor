@@ -15,7 +15,7 @@ class MenuView():
 
     # create default frame
     frame_default = tk.Frame(root)
-    frames['default'].append(frame_default)
+    #frames['default'].append(frame_default)
 
     label_default = tk.Label(frame_default, text='What\'s new today?')
     label_default.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
@@ -143,7 +143,7 @@ class MenuView():
         menu=help_menu
     )
 
-    root.mainloop()
+    # root.mainloop()
 
     def set_controller(self, controller):
         """

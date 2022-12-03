@@ -3,14 +3,17 @@ from datetime import date
 
 class Transaction:
 
-    def __init__(self, amount, currency, project, category, description, expense, date):
-        self.amount = amount
-        self.currency = currency
-        self.project = project
-        self.category = category
-        self.description = description
-        self.expense = expense
-        self.date = date
+    def __init__(self, line):
+
+        infos = line.split(',')
+
+        self.amount = infos[0]
+        self.currency = infos[1]
+        self.project = infos[2]
+        self.category = infos[3]
+        self.description = infos[4]
+        self.expense = infos[5]
+        self.date = infos[6]
 
     # Return a finance the way it should be in the csv file
     def asInFile(self):
@@ -34,7 +37,7 @@ class Transaction:
             cur = '$'
 
         #return 'Amount : ' + expense + self.amount + ' ' + cur + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date
-        return 'Amount : ' + expense + self.amount + ' ' + cur + '\nDescription : ' + self.project + ' --> ' + self.category + ' --> ' + self.description + '\nDate : ' + self.date
+        return 'Amount : ' + expense + str(self.amount) + ' ' + cur + '\nDescription : ' + self.project + ' --> ' + self.category + ' --> ' + self.description + '\nDate : ' + str(self.date) + '\n'
 
     def initialize(path):
 
