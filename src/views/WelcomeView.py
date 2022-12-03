@@ -33,7 +33,6 @@ class RegisterView():
             model = ModelMoneytor()
 
             # We add a new user
-
             model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
             model.user_logged = self.username
 

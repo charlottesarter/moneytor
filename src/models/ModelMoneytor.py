@@ -46,6 +46,7 @@ class ModelMoneytor(object):
 
     def addUser(self, line):
         new_user = User(line)
+        new_user.save()
         self.users.append(new_user)
 
     # Returns the list of all of the users
