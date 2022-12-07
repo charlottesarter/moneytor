@@ -1,3 +1,5 @@
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import tkinter as tk
 from tkinter import Menu, ttk
 
@@ -14,6 +16,58 @@ class ProjectsView():
 
         frame_projects.pack()
 
+class VisualizeView():
+
+    def showVisualizeView(self, root):
+
+        def plot():
+            # the figure that will contain the plot
+            bar_chart = Figure(figsize = (5, 5), dpi = 100)
+
+            # data
+            model = ModelMoneytor()
+            exp_by_cat = model.getExpensesByCategory()
+            categories = list(exp_by_cat.keys())
+            values = list(exp_by_cat.values())
+            
+            # adding the subplot
+            plot1 = bar_chart.add_subplot(111)
+            
+            # plotting the graph
+            plot1.bar(range(len(exp_by_cat)), values, tick_label=categories)
+
+            # space the x axe labels
+            plot1.tick_params(axis='x', which='major', labelsize=8)
+
+            # adding labels for the axes and a title
+            plot1.set_title('Expenses by Category')
+            plot1.set_xlabel('Category')
+            plot1.set_ylabel('Total of Expenses (€)')
+            
+            # creating the Tkinter canvas containing the Matplotlib figure
+            canvas = FigureCanvasTkAgg(bar_chart, master = frame_visualize)
+            canvas.draw()
+            
+            # placing the canvas on the Tkinter window
+            canvas.get_tk_widget().grid(column=0, row=2, sticky=tk.N, padx=5, pady=5)
+            
+            # creating the Matplotlib toolbar
+            # toolbar = NavigationToolbar2Tk(canvas, frame_visualize)
+            # toolbar.update()
+            # placing the toolbar on the Tkinter window
+            # canvas.get_tk_widget().pack()
+
+        frame_visualize = tk.Frame(root)
+
+        label_welcome = ttk.Label(frame_visualize, text='Welcome to the visualize page')
+        label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
+
+        # button that displays the plot
+        plot_button = ttk.Button(master=frame_visualize, command=plot, text = "Plot")
+        plot_button.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+
+        frame_visualize.pack()
+
 class HomePageView():
 
     def showHomePageView(self, root):
@@ -29,6 +83,14 @@ class HomePageView():
             projects_view = ProjectsView()
             ProjectsView.showProjectsView(projects_view, root)
 
+        def exp_by_cat():
+
+            # Destroy frame_homepage
+            frame_homepage.destroy()
+
+            # Create frame_visualize
+            visualize_view = VisualizeView()
+            VisualizeView.showVisualizeView(visualize_view, root)
 
         model = ModelMoneytor()
 
@@ -142,6 +204,8 @@ class HomePageView():
             menubar,
             tearoff=0
         )
+
+        visualize_menu.add_command(label='Expenses by category', command=exp_by_cat)
 
         # add the Visualize menu to the menubar
         menubar.add_cascade(

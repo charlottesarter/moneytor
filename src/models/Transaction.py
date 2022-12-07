@@ -28,7 +28,9 @@ class Transaction:
         else:
             expense = '-'
 
-        cur = 'upsiiis'            # to show currency behind the amount
+        # To show currency behind the amount
+
+        cur = ''
         if self.currency == str(Currency['EUR'].value):
             cur = '€'
         elif self.currency == str(Currency['KRW'].value):
@@ -36,7 +38,6 @@ class Transaction:
         elif self.currency == str(Currency['USD'].value):
             cur = '$'
 
-        #return 'Amount : ' + expense + self.amount + ' ' + cur + '\nProject : ' + self.project + '\nCategory : ' + self.category + '\nDescription : ' + self.description + '\nDate : ' + self.date
         return 'Amount : ' + expense + str(self.amount) + ' ' + cur + '\nDescription : ' + self.project + ' --> ' + self.category + ' --> ' + self.description + '\nDate : ' + str(self.date) + '\n'
 
     def initialize(path):
@@ -57,7 +58,16 @@ class Transaction:
             
         f.close()
 
-    def create():
+    # Multiply the amount by getSign() to obtain the true value of the transaction (positive if income or negative if expense)
+
+    def getSign(self):
+        if self.expense:
+            return -1
+        else:
+            return 1
+
+
+    def create(): # TODO adapt this function for the gui
         amount_new = float(input('Please input the amount: '))
 
         currency_new = 0
