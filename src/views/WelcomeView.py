@@ -1,12 +1,17 @@
 import tkinter as tk
 from tkinter import ttk, Toplevel
 from tkinter.messagebox import showinfo
+import time
+from PIL import Image, ImageTk
 
 import sys
 
 # setting path
-sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers')
-sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/controllers')
+sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
+
+#sys.path.insert(1, 'C:/Users/XX') # @Charlotte: maybe you can add your path seperately then we can both test easier
+#sys.path.insert(1, 'C:/Users/XX')
 
 from ModelMoneytor import ModelMoneytor
 from views.HomePageView import HomePageView
@@ -29,19 +34,25 @@ class RegisterView():
             self.username = getUsername()
             self.password = getPassword()
             self.prefered_currency = getCurrency()
+            
+            #check if the data for registering is valid TODO add more restrictions
+            if(self.username == '' or self.password == ''):
+                show_register_error()
+            else:
+                show_register_success()
+                
+                model = ModelMoneytor()
 
-            model = ModelMoneytor()
+                # We add a new user
+                model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
+                model.user_logged = self.username
 
-            # We add a new user
-            model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
-            model.user_logged = self.username
+                # Destroy register frame
+                frame_register.destroy()
 
-            # Destroy register frame
-            frame_register.destroy()
-
-            # Create homepage frame
-            homepage_view = HomePageView()
-            HomePageView.showHomePageView(homepage_view, root)
+                # Create homepage frame
+                homepage_view = HomePageView()
+                HomePageView.showHomePageView(homepage_view, root)
 
         def getUsername():
             return username_entry.get()
@@ -51,6 +62,28 @@ class RegisterView():
 
         def getCurrency():
             return currency_var.get()
+        
+        def show_register_error():
+            label_register_error = tk.Label(frame_register, text='The username or password is not valid!', fg='red')
+            label_register_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_register_error.after(3000, label_register_error.destroy)
+        
+        def show_register_success(): 
+            def increment(*args):
+                for i in range(100):
+                    progressbar["value"] = i+1
+                    frame_register.update()
+                    time.sleep(0.015)
+            label_register_sucess = tk.Label(frame_register, text='You registered successfully!', fg='green')
+            label_register_sucess.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_register_sucess.after(3000, label_register_sucess.destroy)
+            
+            #create a progressbar to have some time to display the succesfull registering
+            progressbar = ttk.Progressbar(frame_register, length=150, cursor='spider',
+                                mode="determinate",
+                                orient=tk.HORIZONTAL)
+            progressbar.grid(column=0, row=7, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            increment()
 
         frame_register = tk.Frame(root)
 
@@ -119,7 +152,8 @@ class LoginView():
 
             for user in model.getAllUsers():
                 if user.username == self.username and user.password == self.password:
-
+                    
+                    show_login_success()
                     model.user_logged = self.username
 
                     # Destroy login frame
@@ -128,6 +162,8 @@ class LoginView():
                     # Create homepage frame
                     homepage_view = HomePageView()
                     HomePageView.showHomePageView(homepage_view, root)
+                else:
+                    show_login_error()
 
 
         def getUsername():
@@ -135,6 +171,28 @@ class LoginView():
 
         def getPassword():
             return password_entry.get()
+        
+        def show_login_error():
+            label_login_error = tk.Label(frame_login, text='The username or password is not correct!', fg='red')
+            label_login_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_login_error.after(3000, label_login_error.destroy)
+        
+        def show_login_success(): 
+            def increment(*args):
+                for i in range(100):
+                    progressbar["value"] = i+1
+                    frame_login.update()
+                    time.sleep(0.015)
+            label_login_sucess = tk.Label(frame_login, text='Welcome back! We are loading your data...', fg='green')
+            label_login_sucess.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_login_sucess.after(3000, label_login_sucess.destroy)
+            
+            #create a progressbar to have some time to display the succesfull registering
+            progressbar = ttk.Progressbar(frame_login, length=150, cursor='spider',
+                                mode="determinate",
+                                orient=tk.HORIZONTAL)
+            progressbar.grid(column=0, row=7, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            increment()
 
         frame_login = tk.Frame(root)
 
@@ -156,9 +214,17 @@ class LoginView():
 
         # password entry
         password = tk.StringVar()
-        password_entry = ttk.Entry(frame_login, textvariable=password, width=30)
+        password_entry = ttk.Entry(frame_login, textvariable=password, show="*", width=30)
         password_entry.grid(column=1, row=2, sticky=tk.E, padx=5, pady=5)
-
+        # checkbox to make the password show up / disapear
+        def showPassword():     
+            if password_entry.cget('show') == '*':
+                password_entry.config(show='')
+            else:
+                password_entry.config(show='*')
+        check_button_password = tk.Checkbutton(frame_login, text='show password', command=showPassword)
+        check_button_password.grid(column=2, row=2, sticky=tk.E, padx=5, pady=5)
+                
         # login button
         login_button = ttk.Button(frame_login, text='Log in', command=login_button_clicked)
         login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
@@ -195,6 +261,23 @@ class WelcomeView():
         # Welcome page
         
         frame_welcome = tk.Frame(root)
+        
+        path_logo = 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/Bilder/MoneytorLogo.png'
+
+        # Create a photoimage object of the image in the path
+        image1 = Image.open(path_logo)
+        test = ImageTk.PhotoImage(image1)
+
+        label1 = tk.Label(image=test)
+        label1.image = test
+
+        # Position image
+        label1.place(relx = 0.5,
+                   y = 100,
+                   anchor = 'center')
+        
+        #TODO place the logo at a good spot
+        
 
         label_welcome = ttk.Label(frame_welcome, text='Welcome to Moneytor')
         label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
@@ -209,4 +292,11 @@ class WelcomeView():
         button_signup.grid(column=0, row=3, sticky=tk.N, padx=10, pady=10)
                 
         frame_welcome.pack()
+        
+def hide_message(self):
+        """
+        Hide the message
+        :return:
+        """
+        self.message_label['text'] = ''
 
