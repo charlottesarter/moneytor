@@ -16,6 +16,8 @@ if __name__ == '__main__':
 
     # Show the first view : the welcome page
     WelcomeView.showWelcomeView(root)
+    
+    #hallo
 
     # Run the gui
     root.mainloop()
