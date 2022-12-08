@@ -3,7 +3,7 @@ import sys
 # setting path
 sys.path.append('../models')
 
-from models.User import User
+# from models.User import User
 
 class RegisterController:
 

@@ -1,125 +1,212 @@
 import tkinter as tk
-from tkinter import ttk, Tk, Toplevel, Menu, Frame
+from tkinter import ttk, Toplevel
 from tkinter.messagebox import showinfo
 
-from views.RegisterView import RegisterView
+import sys
 
-class WelcomeView(ttk.Frame):
+# setting path
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers')
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+
+from ModelMoneytor import ModelMoneytor
+from views.HomePageView import HomePageView
+
+# If the user click on the 'register' button
+class RegisterView():
     
-    def __init__(self, parent):
-        super().__init__(parent)
-        
-        print('LOLOLOL')
-        
-        #---------------- Startpage ----------------
+    def __init__(self):
 
-        self.frame_login = tk.Frame(self)
+        self.username = ''
+        self.password = ''
+        self.prefered_currency = 0
+    
+    def showRegisterView(self, root):
 
-        self.label_welcome = tk.Label(self.frame_login, text='Welcome to Moneytor', font=('Times New Roman', 15))
-        self.label_welcome.pack()
-        
-        self.label_start_1 = tk.Label(self.frame_login, text='To see your Transactions please log in first', font=('Times New Roman', 10))
-        self.label_start_1.pack()
-        self.button_login = tk.Button(self.frame_login, text='Log in', command=self.login_pressed)
-        self.button_login.pack()
-        
-        self.label_start_2 = tk.Label(self.frame_login, text='To get started, please create an account', font=('Times New Roman', 10))
-        self.label_start_2.pack()
-        self.button_signup = tk.Button(self.frame_login, text='Sign up', command=self.register_pressed)
-        #button_signup.bind("<Button>", lambda e: RegisterView())
-        self.button_signup.pack()
-        
-        
-        
-        self.skip_login = tk.Label(self.frame_login, text='Skip (for testing only)')
-        self.skip_login.pack()
-        self.button_skip_login = tk.Button(self.frame_login, text='Skip', command=self.skip_pressed)
-        self.button_skip_login.pack()
-        
-        
-        
+        def register_button_clicked():
+
+            # Get username, password and currency
+
+            self.username = getUsername()
+            self.password = getPassword()
+            self.prefered_currency = getCurrency()
+
+            model = ModelMoneytor()
+
+            # We add a new user
+            model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
+            model.user_logged = self.username
+
+            # Destroy register frame
+            frame_register.destroy()
+
+            # Create homepage frame
+            homepage_view = HomePageView()
+            HomePageView.showHomePageView(homepage_view, root)
+
+        def getUsername():
+            return username_entry.get()
+
+        def getPassword():
+            return password_entry.get()
+
+        def getCurrency():
+            return currency_var.get()
+
+        frame_register = tk.Frame(root)
+
+        # create widgets
+        # username
+        label_username = ttk.Label(frame_register, text='Username:')
+        label_username.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+
+        # username entry
+        username_var = tk.StringVar()
+        username_entry = ttk.Entry(frame_register, textvariable=username_var, width=30)
+        username_entry.grid(column=1, row=1, sticky=tk.E, padx=5, pady=5)
+
+        # password
+        label_password = ttk.Label(frame_register, text='Password:')
+        label_password.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+
+        # password entry
+        password_var = tk.StringVar()
+        password_entry = ttk.Entry(frame_register, textvariable=password_var, width=30)
+        password_entry.grid(column=1, row=2, sticky=tk.E, padx=5, pady=5)
+
+        # currency
+        label = ttk.Label(frame_register, text='Prefered currency:')
+        label.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
+
+        # currency entry
+        currency_var = tk.IntVar()
+        eur = ttk.Radiobutton(frame_register, text='EUR', variable=currency_var, value=1) # Currency['EUR'].value
+        krw = ttk.Radiobutton(frame_register, text='KRW', variable=currency_var, value=2)
+        usd = ttk.Radiobutton(frame_register, text='USD', variable=currency_var, value=3)
+        eur.grid(row=3, column=1, sticky=tk.W, padx=5, pady=5)
+        krw.grid(row=3, column=1, sticky=tk.N, padx=5, pady=5)
+        usd.grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
+
+        # register button
+        register_button = ttk.Button(frame_register, text='Register', command=register_button_clicked)
+        register_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
+
+        # message
+        # message_label = ttk.Label(frame_register, text='', foreground='red')
+        # message_label.grid(column=0, row=4, sticky=tk.EW, columnspan=2, padx=5, pady=5)
+
+        frame_register.pack()
+
+class LoginView():
+
+    def __init__(self):
+
+        self.username = ''
+        self.password = ''
+
+
+    def showLoginView(self, root):
+
+        def login_button_clicked():
+
+            # Get username and password
+
+            self.username = getUsername()
+            self.password = getPassword()
+
+            model = ModelMoneytor()
+
+            # We go throught the list of users and check if the username and password entered by the user are in the database
+
+            for user in model.getAllUsers():
+                if user.username == self.username and user.password == self.password:
+
+                    model.user_logged = self.username
+
+                    # Destroy login frame
+                    frame_login.destroy()
+
+                    # Create homepage frame
+                    homepage_view = HomePageView()
+                    HomePageView.showHomePageView(homepage_view, root)
+
+
+        def getUsername():
+            return username_entry.get()
+
+        def getPassword():
+            return password_entry.get()
+
+        frame_login = tk.Frame(root)
+
+        label_welcome = ttk.Label(frame_login, text='To see your transactions, please log in first')
+        label_welcome.grid(column=0, row=0, sticky=tk.EW, columnspan=2, padx=5, pady=5)
+
+        # username
+        label_username = ttk.Label(frame_login, text='Username:')
+        label_username.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+
+        # username entry
+        username = tk.StringVar()
+        username_entry = ttk.Entry(frame_login, textvariable=username, width=30)
+        username_entry.grid(column=1, row=1, sticky=tk.E, padx=5, pady=5)
+
+        # password
+        label_password = ttk.Label(frame_login, text='Password:')
+        label_password.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+
+        # password entry
+        password = tk.StringVar()
+        password_entry = ttk.Entry(frame_login, textvariable=password, width=30)
+        password_entry.grid(column=1, row=2, sticky=tk.E, padx=5, pady=5)
+
+        # login button
+        login_button = ttk.Button(frame_login, text='Log in', command=login_button_clicked)
+        login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
                 
-        self.frame_login.pack()
+        frame_login.pack()
 
-        # set the controller
-        self.controller = None      #TODO why is the controller set to None?
-    
-    def set_controller(self, controller):
-        """
-        Set the controller
-        :param controller:
-        :return:
-        """
-        self.controller = controller
-
-    def login_pressed(self):
-        if self.controller:
-            self.controller.login()
-            
-    def register_pressed(self):
-        if self.controller:
-            self.controller.register()
-            
-    def skip_pressed(self):
-        if self.controller:
-            self.controller.start_moneytor()
-            
-    def show_success(self, message):
-        """
-        Show a success message
-        :param message:
-        :return:
-        """
-        self.label_welcome = tk.Label(self.frame_login, text=message)
-        self.label_welcome.pack()
         
-    def show_login(self):
-        pass
+class WelcomeView():
+
+    def showWelcomeView(root):
+
+        # If the user click on the login button
+
+        def login():
+
+            # Destroy frame_welcome
+            frame_welcome.destroy()
+
+            # Create login_frame
+            login_view = LoginView()
+            LoginView.showLoginView(login_view, root)
+
+        # If the user click on the register button
+
+        def register():
+
+            # Destroy frame_welcome
+            frame_welcome.destroy()
+
+            # Create login_frame
+            register_view = RegisterView()
+            RegisterView.showRegisterView(register_view, root)
+
+        # Welcome page
         
-    def show_register(self):
-        pass
-    
-    def start_moneytor(self):       #TODO add the code from MenuView.py here
-        
-        # self.frame_login.destroy()
+        frame_welcome = tk.Frame(root)
 
-        # root = tk.Tk()
-        # root.withdraw()
+        label_welcome = ttk.Label(frame_welcome, text='Welcome to Moneytor')
+        label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
 
-        # toplevel = tk.Toplevel(root)
+        label_start_1 = ttk.Label(frame_welcome, text='To see your transactions, please log in first')
+        label_start_1.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+                
+        button_login = ttk.Button(frame_welcome, text='Log in', command=login)
+        button_login.grid(column=0, row=2, sticky=tk.N, padx=10, pady=10)
 
-        # # create a toplevel menu
-        # menubar = tk.Menu(toplevel)
-        # menubar.add_command(label="Hello!")
-        # menubar.add_command(label="Quit!", command=root.quit)
+        button_signup = ttk.Button(frame_welcome, text='Register', command=register)
+        button_signup.grid(column=0, row=3, sticky=tk.N, padx=10, pady=10)
+                
+        frame_welcome.pack()
 
-        # # display the menu
-        # toplevel.config(menu=menubar)
-
-        # root.mainloop()
-        
-        
-        self.a_frame = FrameWithMenu(self)
-        self.create_menu()
-
-    def create_menu(self):
-        self.menubar = tk.Menu(self)
-        self.menubar.add_command(label="Root", command=self.a_frame.replace_menu)
-        self['menu'] = self.menubar
-
-
-
-class FrameWithMenu(tk.Frame):
-    def __init__(self, master):
-        super().__init__(master)
-
-    def replace_menu(self):
-        """ Overwrite parent's menu if parent's class name is in _valid_cls_names.
-        """
-
-        _parent_cls_name = type(self.master).__name__
-        _valid_cls_names = ("Tk", "Toplevel", "Root")
-        if _parent_cls_name in _valid_cls_names:
-            self.menubar = tk.Menu(self)
-            self.menubar.add_command(label="Frame", command=self.master.create_menu)
-            self.master['menu'] = self.menubar
