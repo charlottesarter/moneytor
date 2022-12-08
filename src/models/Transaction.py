@@ -51,7 +51,7 @@ class Transaction:
                 print('End of the data')
             else:
                 finance = Transaction(values[0], values[1], values[2], values[3], values[4], values[5], values[6])
-                print(finance)
+                #print(finance)
 
             if not line:
                 break
@@ -104,6 +104,10 @@ class Transaction:
         #if(new_finance.isinstance()):
         #    print('New Object has been created')   #TODO check if object was created successfully
         return new_finance
+    
+    def create(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new):
+        new_finance = Transaction(amount_new, currency_new, project_new, category_new, description_new, expense_new, date_new)
+        return new_finance  
 
 
     def add(new_finance, path):
