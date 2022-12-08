@@ -11,7 +11,7 @@ class ModelMoneytor(object):
     def __init__(self):
 
         # The list of all of the users of the app (users.csv)
-
+        
         self.users = [] 
 
         fd = open('data/users.csv', 'r')
