@@ -262,8 +262,9 @@ class WelcomeView():
         
         frame_welcome = tk.Frame(root)
         
+        
+        
         path_logo = 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/Bilder/MoneytorLogo.png'
-
         # Create a photoimage object of the image in the path
         image1 = Image.open(path_logo)
         test = ImageTk.PhotoImage(image1)
@@ -272,12 +273,13 @@ class WelcomeView():
         label1.image = test
 
         # Position image
-        label1.place(relx = 0.5,
-                   y = 100,
-                   anchor = 'center')
+        #label1.place(relx = 0.5, y = 100, anchor = 'center')
+        label1.place(x = 10, y = 10) #just to have it somewhere
         
         #TODO place the logo at a good spot
         
+
+
 
         label_welcome = ttk.Label(frame_welcome, text='Welcome to Moneytor')
         label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
@@ -292,11 +294,4 @@ class WelcomeView():
         button_signup.grid(column=0, row=3, sticky=tk.N, padx=10, pady=10)
                 
         frame_welcome.pack()
-        
-def hide_message(self):
-        """
-        Hide the message
-        :return:
-        """
-        self.message_label['text'] = ''
 
