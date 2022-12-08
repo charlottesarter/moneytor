@@ -7,11 +7,9 @@ from models.User import User
 class ModelMoneytor(object):
 
     # Initialization of the model (from the files users.csv and transactions.csv)
-
     def __init__(self):
 
         # The list of all of the users of the app (users.csv)
-        
         self.users = [] 
 
         fd = open('data/users.csv', 'r')
