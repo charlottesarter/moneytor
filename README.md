@@ -4,6 +4,8 @@
 
 > Moneytor = 'Money' + 'to monitor'
 
+#TODO: add all the necceasary extensions like matplot etc. and (python3 -m pip install pillow)
+
 Moneytor is an open source software designed to help people manage their finances. The user can put in all of his/her expenses and incomes and sort them based on different parameters.
 Moneytor provides multiple ways to visualize the finances. The user can play with different filters to better analyze his/her finances.
 
