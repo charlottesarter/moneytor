@@ -11,29 +11,31 @@ from ModelMoneytor import ModelMoneytor
 
 class HomePageView():
     
-    def handle_Menu(self, root):
+    def handleMenu(self, root):
         
         ####################### HOMEPAGE #######################
-        def show_homepage():
+        def showHomePage():
+
             for widget in main_frame.winfo_children():
                 widget.destroy()
                 
             model = ModelMoneytor()
 
             text_hello = 'What\'s new today' + model.user_logged + '?'  # TODO display name
+            print('name:', model.user_logged)
             label_homepage = tk.Label(main_frame, text=text_hello)
             label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
 
             # create widgets
             # project
             label_project = ttk.Label(main_frame, text='Project')
-            label_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+            label_project.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
 
             default_project = tk.StringVar()
             # initial menu text
-            default_project.set( "Life" )
+            default_project.set( "Daily Life" )
             dropdown_category = tk.OptionMenu(main_frame, default_project , *model.getAllProjects())  #TODO let the user create a new projects
-            dropdown_category.grid(column=0, row=2, sticky=tk.N, padx=5, pady=5)
+            dropdown_category.grid(column=0, row=2, sticky=tk.N, columnspan=2, padx=5, pady=5)
             #TODO get the input
             # project entry
             # project_var = tk.StringVar()
@@ -42,13 +44,13 @@ class HomePageView():
 
             # category
             label_category = ttk.Label(main_frame, text='Category')
-            label_category.grid(column=1, row=1, sticky=tk.N, padx=5, pady=5)
+            label_category.grid(column=1, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
                 
             default_category = tk.StringVar()
             # initial menu text
             default_category.set( "Food" )
             dropdown_category = tk.OptionMenu(main_frame, default_category , *model.getAllCategories())  #TODO let the user create a new category
-            dropdown_category.grid(column=1, row=2, sticky=tk.N, padx=5, pady=5)
+            dropdown_category.grid(column=1, row=2, sticky=tk.N, columnspan=2, padx=5, pady=5)
             # category entry
             # category_var = tk.StringVar()
             # category_entry = ttk.Entry(main_frame, textvariable=category_var, width=30)
@@ -56,30 +58,30 @@ class HomePageView():
 
             # description
             label_description = ttk.Label(main_frame, text='Description')
-            label_description.grid(column=1, row=3, sticky=tk.N, padx=5, pady=5)
+            label_description.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
 
             # category entry
             description_var = tk.StringVar()
             description_entry = ttk.Entry(main_frame, textvariable=description_var, width=30)
-            description_entry.grid(column=1, row=4, sticky=tk.E, padx=5, pady=5)
+            description_entry.grid(column=0, row=4, sticky=tk.E, padx=5, pady=5)
 
             # amount
             label_amount = ttk.Label(main_frame, text='Amount')
-            label_amount.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
+            label_amount.grid(column=1, row=3, sticky=tk.N, padx=5, pady=5)
 
             # amount entry
             amount_var = tk.StringVar()
             amount_entry = ttk.Entry(main_frame, textvariable=amount_var, width=30)
-            amount_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
+            amount_entry.grid(column=1, row=4, sticky=tk.E, padx=5, pady=5)
 
             # currency
             label_currency = ttk.Label(main_frame, text='Currency')
-            label_currency.grid(column=3, row=3, sticky=tk.N, padx=5, pady=5)
+            label_currency.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
 
             # currency entry
             currency_var = tk.IntVar()
-            currency_entry = ttk.Entry(main_frame, textvariable=currency_var, width=30)
-            currency_entry.grid(column=3, row=4, sticky=tk.E, padx=5, pady=5)
+            currency_entry = ttk.Spinbox(main_frame, textvariable=currency_var, from_=0, width=30)
+            currency_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
 
             # expense button
             expense_button = ttk.Button(main_frame, text='Expense') # TODO : define the command of the button 
@@ -90,17 +92,30 @@ class HomePageView():
             income_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=5)
 
         ####################### PROJECTS #######################
-        def show_projects():
+        def showProjects():
+
             for widget in main_frame.winfo_children():
                 widget.destroy()
 
-            label_welcome = ttk.Label(main_frame, text='Welcome to the project page')
+            label_welcome = ttk.Label(main_frame, text='Select a project to display its key information')
             label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
+
+            # project
+            label_project = ttk.Label(main_frame, text='Project')
+            label_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+
+            default_project = tk.StringVar()
+            # initial menu text
+            default_project.set( "Daily Life" )
+            dropdown_category = tk.OptionMenu(main_frame, default_project , *model.getAllProjects())
+            dropdown_category.grid(column=1, row=1, sticky=tk.N, padx=5, pady=5)
+
+
 
             main_frame.pack()
 
         ####################### VISUALIZE #######################
-        def show_exp_by_cat():
+        def showVisualize():
             for widget in main_frame.winfo_children():
                 widget.destroy()
                 
@@ -149,7 +164,8 @@ class HomePageView():
             plot_button.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
         
         ####################### ABOUT #######################
-        def show_about():
+        def showAbout():
+
             for widget in main_frame.winfo_children():
                 widget.destroy()
                 
@@ -157,7 +173,8 @@ class HomePageView():
             label_amount.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
         
         ####################### LOGOUT #######################
-        def show_logout():
+        def showLogout():
+
             # welcome_view = WelcomeView()
             # WelcomeView.showWelcomeView(self)
             root.destroy    #TODO redirect to welcome view instead of closing the window
@@ -173,7 +190,7 @@ class HomePageView():
         main_frame.pack()
 
 
-        ############# create a menubar #############
+        ############# Create a menubar #############
         menubar = Menu(root)
         root.config(menu=menubar)
 
@@ -185,25 +202,25 @@ class HomePageView():
         
         menubar.add_cascade(
             label="Homepage",
-            command=show_homepage
+            command=showHomePage
         )
         
         menubar.add_cascade(
             label="Projects",
-            command=show_projects
+            command=showProjects
         )
         
         menubar.add_cascade(
             label="Visualize",
-            command=show_exp_by_cat
+            command=showVisualize
         )
         
         menubar.add_cascade(
             label="About",
-            command=show_about
+            command=showAbout
         )
         
         menubar.add_cascade(
             label="Logout",
-            command=show_logout
+            command=showLogout
         )

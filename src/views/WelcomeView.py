@@ -27,7 +27,7 @@ class RegisterView():
     
     def showRegisterView(self, root):
 
-        def register_button_clicked():
+        def registerButtonClicked():
 
             # Get username, password and currency
 
@@ -37,29 +37,30 @@ class RegisterView():
             
             #check if the data for registering is valid TODO add more restrictions
             if(self.username == ''):
-                show_register_error('The username can not be empty')
+                showRegisterError('The username can not be empty')
             elif(self.password == ''):
-                show_register_error('please enter a password to register')
+                showRegisterError('Please enter a password to register')
             elif(self.prefered_currency == 0):
-                show_register_error('please select a preferrd currency to continue')
+                showRegisterError('Please select a preferrd currency to continue')
             else:
-                show_register_success()
+                showRegisterSuccess()
                 
                 model = ModelMoneytor()
 
                 # We add a new user
                 model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
                 model.user_logged = self.username
+                print(model.user_logged)
 
                 # Destroy register frame
                 frame_register.destroy()
 
                 # Create homepage frame
                 homepage_view = HomePageView()
-                HomePageView.handle_Menu(homepage_view, root)
+                HomePageView.handleMenu(homepage_view, root)
 
         # function to return to the start page           
-        def back_button_clicked():
+        def backButtonClicked():
             frame_register.destroy()
             WelcomeView.showWelcomeView(root)
 
@@ -72,12 +73,12 @@ class RegisterView():
         def getCurrency():
             return currency_var.get()
         
-        def show_register_error(error_text):
+        def showRegisterError(error_text):
             label_register_error = tk.Label(frame_register, text=error_text, fg='red')
             label_register_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
             label_register_error.after(3000, label_register_error.destroy)
         
-        def show_register_success(): 
+        def showRegisterSuccess(): 
             def increment(*args):
                 for i in range(100):
                     progressbar["value"] = i+1
@@ -129,11 +130,11 @@ class RegisterView():
         usd.grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
 
         # register button
-        register_button = ttk.Button(frame_register, text='Register', command=register_button_clicked)
+        register_button = ttk.Button(frame_register, text='Register', command=registerButtonClicked)
         register_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
         
         # back button
-        back_button = ttk.Button(frame_register, text='Back', command=back_button_clicked)
+        back_button = ttk.Button(frame_register, text='Back', command=backButtonClicked)
         back_button.grid(column=0, row=10, sticky=tk.S, columnspan=2, padx=5, pady=5)
 
         frame_register.pack()
@@ -148,7 +149,7 @@ class LoginView():
 
     def showLoginView(self, root):
 
-        def login_button_clicked():
+        def loginButtonClicked():
 
             # Get username and password
 
@@ -162,7 +163,7 @@ class LoginView():
             for user in model.getAllUsers():
                 if user.username == self.username and user.password == self.password:
                     
-                    show_login_success()
+                    showLoginSuccess()
                     model.user_logged = self.username
 
                     # Destroy login frame
@@ -170,12 +171,12 @@ class LoginView():
 
                     # Create homepage frame
                     homepage_view = HomePageView()
-                    HomePageView.handle_Menu(homepage_view, root)
+                    HomePageView.handleMenu(homepage_view, root)
                 else:
-                    show_login_error('Username or Password not correct.')
+                    showLoginError('Incorrect Username or Password.')
         
         # function to return to the start page           
-        def back_button_clicked():
+        def backButtonClicked():
             frame_login.destroy()
             WelcomeView.showWelcomeView(root)
 
@@ -185,12 +186,12 @@ class LoginView():
         def getPassword():
             return password_entry.get()
         
-        def show_login_error(error_text):
+        def showLoginError(error_text):
             label_login_error = tk.Label(frame_login, text=error_text, fg='red')
             label_login_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
             label_login_error.after(3000, label_login_error.destroy)
         
-        def show_login_success(): 
+        def showLoginSuccess(): 
             def increment(*args):
                 for i in range(100):
                     progressbar["value"] = i+1
@@ -239,11 +240,11 @@ class LoginView():
         check_button_password.grid(column=2, row=2, sticky=tk.E, padx=5, pady=5)
                 
         # login button
-        login_button = ttk.Button(frame_login, text='Log in', command=login_button_clicked)
+        login_button = ttk.Button(frame_login, text='Log in', command=loginButtonClicked)
         login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
         
         # back button
-        back_button = ttk.Button(frame_login, text='Back', command=back_button_clicked)
+        back_button = ttk.Button(frame_login, text='Back', command=backButtonClicked)
         back_button.grid(column=0, row=10, sticky=tk.S, columnspan=2, padx=5, pady=5)
                 
         frame_login.pack()
@@ -259,7 +260,7 @@ class WelcomeView():
 
             # Destroy frame_welcome
             frame_welcome.destroy()
-            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
+            label_logo.destroy()    # Needs to be destroyed seperately because it sits in the root window
 
             # Create login_frame
             login_view = LoginView()
@@ -271,7 +272,7 @@ class WelcomeView():
 
             # Destroy frame_welcome
             frame_welcome.destroy()
-            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
+            label_logo.destroy()    # Needs to be destroyed seperately because it sits in the root window
 
             # Create login_frame
             register_view = RegisterView()
@@ -281,15 +282,14 @@ class WelcomeView():
 
             # Destroy frame_welcome
             frame_welcome.destroy()
-            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
+            label_logo.destroy()    # Needs to be destroyed seperately because it sits in the root window
 
             homepage_view = HomePageView()
-            HomePageView.handle_Menu(homepage_view, root)
+            HomePageView.handleMenu(homepage_view, root)
 
         # Welcome page
         
         frame_welcome = tk.Frame(root)
-        
         
         # show the logo at the start page
         path_logo = 'C:/Users/charl/Desktop/moneytor/images/MoneytorLogo.png'
@@ -300,7 +300,7 @@ class WelcomeView():
         label_logo.image = photo
         label_logo.pack()
 
-        label_welcome = ttk.Label(frame_welcome, text='Welcome to Moneytor')
+        label_welcome = ttk.Label(frame_welcome, text='WELCOME TO MONEYTOR')
         label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
 
         label_start_1 = ttk.Label(frame_welcome, text='To see your transactions, please log in first')
@@ -309,7 +309,7 @@ class WelcomeView():
         button_login = ttk.Button(frame_welcome, text='Log in', command=login)
         button_login.grid(column=0, row=2, sticky=tk.N, padx=10, pady=10)
         
-        label_start_2 = ttk.Label(frame_welcome, text='If you are new please create an account first')
+        label_start_2 = ttk.Label(frame_welcome, text='If you are new, please create an account first')
         label_start_2.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
 
         button_signup = ttk.Button(frame_welcome, text='Register', command=register)
@@ -320,6 +320,5 @@ class WelcomeView():
         button_skip = ttk.Button(frame_welcome, text='Skip', command=skipForTesting)
         button_skip.grid(column=0, row=10, sticky=tk.N, padx=10, pady=10)
         
-                
         frame_welcome.pack()
 
