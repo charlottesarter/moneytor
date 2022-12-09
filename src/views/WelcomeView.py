@@ -189,30 +189,28 @@ class LoginView():
         
         def showLoginError(error_text):
             label_login_error = tk.Label(frame_login, text=error_text, fg='red')
-            label_login_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_login_error.grid(column=0, row=6, sticky=tk.S, columnspan=3, padx=5, pady=5)
             label_login_error.after(3000, label_login_error.destroy)
         
         def showLoginSuccess(): 
             def increment(*args):
                 for i in range(100):
-                    progressbar["value"] = i+1
+                    progressbar["value"] = i + 1
                     frame_login.update()
                     time.sleep(0.015)
             label_login_sucess = tk.Label(frame_login, text='Welcome back! We are loading your data...', fg='green')
-            label_login_sucess.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            label_login_sucess.grid(column=0, row=6, sticky=tk.S, columnspan=3, padx=5, pady=5)
             label_login_sucess.after(3000, label_login_sucess.destroy)
             
             #create a progressbar to have some time to display the succesfull registering
-            progressbar = ttk.Progressbar(frame_login, length=150, cursor='spider',
-                                mode="determinate",
-                                orient=tk.HORIZONTAL)
-            progressbar.grid(column=0, row=7, sticky=tk.S, columnspan=2, padx=5, pady=5)
+            progressbar = ttk.Progressbar(frame_login, length=150, cursor='spider', mode="determinate", orient=tk.HORIZONTAL)
+            progressbar.grid(column=0, row=7, sticky=tk.S, columnspan=3, padx=5, pady=5)
             increment()
 
         frame_login = tk.Frame(root)
 
         label_welcome = ttk.Label(frame_login, text='To see your transactions, please log in first')
-        label_welcome.grid(column=0, row=0, sticky=tk.EW, columnspan=2, padx=5, pady=5)
+        label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=3, padx=5, pady=5)
 
         # username
         label_username = ttk.Label(frame_login, text='Username:')
@@ -242,11 +240,11 @@ class LoginView():
                 
         # login button
         login_button = ttk.Button(frame_login, text='Log in', command=loginButtonClicked)
-        login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
+        login_button.grid(column=0, row=5, sticky=tk.S, columnspan=3, padx=5, pady=5)
         
         # back button
         back_button = ttk.Button(frame_login, text='Back', command=backButtonClicked)
-        back_button.grid(column=0, row=10, sticky=tk.S, columnspan=2, padx=5, pady=5)
+        back_button.grid(column=0, row=10, sticky=tk.S, columnspan=3, padx=5, pady=5)
                 
         frame_login.pack()
 
