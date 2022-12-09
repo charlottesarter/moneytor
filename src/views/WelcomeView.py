@@ -276,6 +276,15 @@ class WelcomeView():
             # Create login_frame
             register_view = RegisterView()
             RegisterView.showRegisterView(register_view, root)
+            
+        def skipForTesting():
+
+            # Destroy frame_welcome
+            frame_welcome.destroy()
+            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
+
+            homepage_view = HomePageView()
+            HomePageView.showHomePageView(homepage_view, root)
 
         # Welcome page
         
@@ -305,6 +314,12 @@ class WelcomeView():
 
         button_signup = ttk.Button(frame_welcome, text='Register', command=register)
         button_signup.grid(column=0, row=4, sticky=tk.N, padx=10, pady=10)
+        
+        
+        ############# ONLY FOR TESTING #####################
+        button_skip = ttk.Button(frame_welcome, text='Skip', command=skipForTesting)
+        button_skip.grid(column=0, row=10, sticky=tk.N, padx=10, pady=10)
+        
                 
         frame_welcome.pack()
 
