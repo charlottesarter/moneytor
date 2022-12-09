@@ -16,7 +16,7 @@ class ProjectsView():
 
         frame_projects.pack()
 
-class VisualizeView():
+class VisualizeView1():
 
     def showVisualizeView(self, root):
 
@@ -68,13 +68,13 @@ class VisualizeView():
 
         frame_visualize.pack()
 
-class HomePageView():
+class HomePageView1():
 
     def showHomePageView(self, root):
 
         # If the user click on the projects button
 
-        def projects():
+        def show_projects():
 
             # Destroy frame_homepage
             frame_homepage.destroy()
@@ -83,7 +83,7 @@ class HomePageView():
             projects_view = ProjectsView()
             ProjectsView.showProjectsView(projects_view, root)
 
-        def exp_by_cat():
+        def show_exp_by_cat():
 
             # Destroy frame_homepage
             frame_homepage.destroy()
@@ -91,13 +91,22 @@ class HomePageView():
             # Create frame_visualize
             visualize_view = VisualizeView()
             VisualizeView.showVisualizeView(visualize_view, root)
+            
+        def show_homepage():
+
+            # Destroy frame_homepage
+            frame_homepage.destroy()
+
+            # Create frame_visualize
+            homepage_view = HomePageView()
+            VisualizeView.showVisualizeView(homepage_view, root)
 
         model = ModelMoneytor()
 
         # create homepage frame
         frame_homepage = tk.Frame(root)
 
-        text_hello = 'What\'s new today' + model.user_logged + '?'
+        text_hello = 'What\'s new today' + model.user_logged + '?'  # TODO display name
         label_homepage = tk.Label(frame_homepage, text=text_hello)
         label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
 
@@ -157,7 +166,148 @@ class HomePageView():
                 
         frame_homepage.pack()
 
-        # create a menubar
+
+
+        # ############# create a menubar #############
+        # menubar = Menu(root)
+        # root.config(menu=menubar)
+
+        # # create the homepage_menu
+        # homepage_menu = Menu(
+        #     menubar,
+        #     tearoff=0
+        # )
+        
+        # menubar.add_cascade(
+        #     label="Homepage",
+        #     command=show_homepage
+        # )
+        
+        # menubar.add_cascade(
+        #     label="Projects",
+        #     command=show_projects
+        # )
+        
+        # menubar.add_cascade(
+        #     label="Visualize",
+        #     command=show_exp_by_cat
+        # )
+        
+        # menubar.add_cascade(
+        #     label="Logout",
+        #     command=root.destroy    #TODO change to start page instead of destroying everything
+        # )
+
+        # # add menu items to the Homepage menu # TODO --> we can remove them if we don't need them
+        # homepage_menu.add_command(label='New')
+        # homepage_menu.add_command(label='Open...')
+        # homepage_menu.add_command(label='Close')
+        # homepage_menu.add_separator()
+
+        # # add Exit menu item (closes the app)
+        # homepage_menu.add_command(
+        #     label='Exit',
+        #     command=root.destroy
+        # )
+
+        # # add the Homepage menu to the menubar
+        # menubar.add_cascade(
+        #     label="Homepage",
+        #     menu=homepage_menu
+        # )
+
+        # # create the Projects menu
+        # projects_menu = Menu(
+        #     menubar,
+        #     tearoff=0
+        # )
+
+        # projects_menu.add_command(label='See all', command=projects)
+
+        # # add the Projects menu to the menubar
+        # menubar.add_cascade(
+        #     label="Projects",
+        #     menu=projects_menu,
+        # )
+
+        # # create the Visualize menu
+        # visualize_menu = Menu(
+        #     menubar,
+        #     tearoff=0
+        # )
+
+        # visualize_menu.add_command(label='Expenses by category', command=exp_by_cat)
+
+        # # add the Visualize menu to the menubar
+        # menubar.add_cascade(
+        #     label="Visualize",
+        #     menu=visualize_menu
+        # )
+
+        # # create the Help menu
+        # help_menu = Menu(
+        #     menubar,
+        #     tearoff=0
+        # )
+
+        # help_menu.add_command(label='Welcome')
+        # help_menu.add_command(label='About...')
+
+        # # add the Help menu to the menubar
+        # menubar.add_cascade(
+        #     label="Help",
+        #     menu=help_menu
+        # )
+        
+        
+class HomePageView():
+
+#put all in one frame and put it in parameter to give it when creatinf a nrew frame and then clear it and werite it new
+
+    def showMenu(self, root):
+
+        def show_projects():
+
+            # Destroy frame_homepage
+            # for widget in frame.winfo_children():
+            #     widget.destroy()
+
+            # Create frame_projects
+            projects_view = ProjectsView()
+            ProjectsView.showProjectsView(projects_view, root)
+
+        def show_exp_by_cat():
+
+            # Destroy frame_homepage
+            #frame_start.destroy()
+
+            # Create frame_visualize
+            visualize_view = VisualizeView()
+            VisualizeView.showVisualizeView(visualize_view, frame_start)
+            
+        def show_homepage():
+
+            # Destroy frame_homepage
+            frame_start.destroy()
+
+            # Create frame_visualize
+            homepage_view = HomePageView1()
+            HomePageView1.showHomePageView(homepage_view, root)
+
+        model = ModelMoneytor()
+
+        # create homepage frame
+        frame_start = tk.Frame(root)
+
+        label_homepage = tk.Label(frame_start, text='HOMEpAGE')
+        label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
+
+   
+        frame_start.pack()
+
+
+
+        ############# create a menubar #############
         menubar = Menu(root)
         root.config(menu=menubar)
 
@@ -166,64 +316,29 @@ class HomePageView():
             menubar,
             tearoff=0
         )
-
-        # add menu items to the Homepage menu # TODO --> we can remove them if we don't need them
-        homepage_menu.add_command(label='New')
-        homepage_menu.add_command(label='Open...')
-        homepage_menu.add_command(label='Close')
-        homepage_menu.add_separator()
-
-        # add Exit menu item (closes the app)
-        homepage_menu.add_command(
-            label='Exit',
-            command=root.destroy
-        )
-
-        # add the Homepage menu to the menubar
+        
         menubar.add_cascade(
             label="Homepage",
-            menu=homepage_menu
+            command=show_homepage
         )
-
-        # create the Projects menu
-        projects_menu = Menu(
-            menubar,
-            tearoff=0
-        )
-
-        projects_menu.add_command(label='See all', command=projects)
-
-        # add the Projects menu to the menubar
+        
         menubar.add_cascade(
             label="Projects",
-            menu=projects_menu,
+            command=show_projects
         )
-
-        # create the Visualize menu
-        visualize_menu = Menu(
-            menubar,
-            tearoff=0
-        )
-
-        visualize_menu.add_command(label='Expenses by category', command=exp_by_cat)
-
-        # add the Visualize menu to the menubar
+        
         menubar.add_cascade(
             label="Visualize",
-            menu=visualize_menu
+            command=show_exp_by_cat
         )
-
-        # create the Help menu
-        help_menu = Menu(
-            menubar,
-            tearoff=0
-        )
-
-        help_menu.add_command(label='Welcome')
-        help_menu.add_command(label='About...')
-
-        # add the Help menu to the menubar
+        
         menubar.add_cascade(
-            label="Help",
-            menu=help_menu
+            label="Logout",
+            command=root.destroy    #TODO change to start page instead of destroying everything
         )
+        
+class VisualizeView():
+
+    def showVisualizeView(self, frame):
+        label = tk.Label(frame, text='halololol')
+        label.grid(column=0, row=1, sticky=tk.E, padx=5, pady=5)
