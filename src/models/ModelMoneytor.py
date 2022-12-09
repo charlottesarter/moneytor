@@ -7,11 +7,9 @@ from models.User import User
 class ModelMoneytor(object):
 
     # Initialization of the model (from the files users.csv and transactions.csv)
-
     def __init__(self):
 
         # The list of all of the users of the app (users.csv)
-
         self.users = [] 
 
         fd = open('data/users.csv', 'r')
@@ -76,6 +74,17 @@ class ModelMoneytor(object):
                 categories.append(transaction.category)
         
         return categories
+    
+    def getAllProjects(self):
+        
+        projects = []
+
+        for transaction in self.transactions:
+            
+            if transaction.project not in projects:
+                projects.append(transaction.project)
+        
+        return projects
 
     # Returns a dictionary : {'category':total of expenses in this category}
 
