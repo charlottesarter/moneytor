@@ -36,8 +36,12 @@ class RegisterView():
             self.prefered_currency = getCurrency()
             
             #check if the data for registering is valid TODO add more restrictions
-            if(self.username == '' or self.password == ''):
-                show_register_error()
+            if(self.username == ''):
+                show_register_error('The username can not be empty')
+            elif(self.password == ''):
+                show_register_error('please enter a password to register')
+            elif(self.prefered_currency == 0):
+                show_register_error('please select a preferrd currency to continue')
             else:
                 show_register_success()
                 
@@ -68,8 +72,8 @@ class RegisterView():
         def getCurrency():
             return currency_var.get()
         
-        def show_register_error():
-            label_register_error = tk.Label(frame_register, text='The username or password is not valid!', fg='red')
+        def show_register_error(error_text):
+            label_register_error = tk.Label(frame_register, text=error_text, fg='red')
             label_register_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
             label_register_error.after(3000, label_register_error.destroy)
         
@@ -168,7 +172,7 @@ class LoginView():
                     homepage_view = HomePageView()
                     HomePageView.showHomePageView(homepage_view, root)
                 else:
-                    show_login_error()
+                    show_login_error('Username or Password not correct.')
         
         # function to return to the start page           
         def back_button_clicked():
@@ -181,8 +185,8 @@ class LoginView():
         def getPassword():
             return password_entry.get()
         
-        def show_login_error():
-            label_login_error = tk.Label(frame_login, text='The username or password is not correct!', fg='red')
+        def show_login_error(error_text):
+            label_login_error = tk.Label(frame_login, text=error_text, fg='red')
             label_login_error.grid(column=0, row=6, sticky=tk.S, columnspan=2, padx=5, pady=5)
             label_login_error.after(3000, label_login_error.destroy)
         
