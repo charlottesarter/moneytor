@@ -54,6 +54,11 @@ class RegisterView():
                 homepage_view = HomePageView()
                 HomePageView.showHomePageView(homepage_view, root)
 
+        # function to return to the start page           
+        def back_button_clicked():
+            frame_register.destroy()
+            WelcomeView.showWelcomeView(root)
+
         def getUsername():
             return username_entry.get()
 
@@ -122,10 +127,10 @@ class RegisterView():
         # register button
         register_button = ttk.Button(frame_register, text='Register', command=register_button_clicked)
         register_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
-
-        # message
-        # message_label = ttk.Label(frame_register, text='', foreground='red')
-        # message_label.grid(column=0, row=4, sticky=tk.EW, columnspan=2, padx=5, pady=5)
+        
+        # back button
+        back_button = ttk.Button(frame_register, text='Back', command=back_button_clicked)
+        back_button.grid(column=0, row=10, sticky=tk.S, columnspan=2, padx=5, pady=5)
 
         frame_register.pack()
 
@@ -164,7 +169,11 @@ class LoginView():
                     HomePageView.showHomePageView(homepage_view, root)
                 else:
                     show_login_error()
-
+        
+        # function to return to the start page           
+        def back_button_clicked():
+            frame_login.destroy()
+            WelcomeView.showWelcomeView(root)
 
         def getUsername():
             return username_entry.get()
@@ -228,6 +237,10 @@ class LoginView():
         # login button
         login_button = ttk.Button(frame_login, text='Log in', command=login_button_clicked)
         login_button.grid(column=0, row=5, sticky=tk.S, columnspan=2, padx=5, pady=5)
+        
+        # back button
+        back_button = ttk.Button(frame_login, text='Back', command=back_button_clicked)
+        back_button.grid(column=0, row=10, sticky=tk.S, columnspan=2, padx=5, pady=5)
                 
         frame_login.pack()
 
@@ -242,6 +255,7 @@ class WelcomeView():
 
             # Destroy frame_welcome
             frame_welcome.destroy()
+            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
 
             # Create login_frame
             login_view = LoginView()
@@ -253,6 +267,7 @@ class WelcomeView():
 
             # Destroy frame_welcome
             frame_welcome.destroy()
+            label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
 
             # Create login_frame
             register_view = RegisterView()
@@ -263,23 +278,14 @@ class WelcomeView():
         frame_welcome = tk.Frame(root)
         
         
-        
+        # show the logo at the start page
         path_logo = 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/Bilder/MoneytorLogo.png'
-        # Create a photoimage object of the image in the path
-        image1 = Image.open(path_logo)
-        test = ImageTk.PhotoImage(image1)
+        image = Image.open(path_logo)
+        photo = ImageTk.PhotoImage(image)   #convert the image type
 
-        label1 = tk.Label(image=test)
-        label1.image = test
-
-        # Position image
-        #label1.place(relx = 0.5, y = 100, anchor = 'center')
-        label1.place(x = 10, y = 10) #just to have it somewhere
-        
-        #TODO place the logo at a good spot
-        
-
-
+        label_logo = tk.Label(root, image = photo)
+        label_logo.image = photo
+        label_logo.pack()
 
         label_welcome = ttk.Label(frame_welcome, text='Welcome to Moneytor')
         label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
@@ -289,9 +295,12 @@ class WelcomeView():
                 
         button_login = ttk.Button(frame_welcome, text='Log in', command=login)
         button_login.grid(column=0, row=2, sticky=tk.N, padx=10, pady=10)
+        
+        label_start_2 = ttk.Label(frame_welcome, text='If you are new please create an account first')
+        label_start_2.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
 
         button_signup = ttk.Button(frame_welcome, text='Register', command=register)
-        button_signup.grid(column=0, row=3, sticky=tk.N, padx=10, pady=10)
+        button_signup.grid(column=0, row=4, sticky=tk.N, padx=10, pady=10)
                 
         frame_welcome.pack()
 
