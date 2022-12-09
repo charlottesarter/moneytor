@@ -56,7 +56,7 @@ class RegisterView():
 
                 # Create homepage frame
                 homepage_view = HomePageView()
-                HomePageView.showHomePageView(homepage_view, root)
+                HomePageView.handle_Menu(homepage_view, root)
 
         # function to return to the start page           
         def back_button_clicked():
@@ -170,7 +170,7 @@ class LoginView():
 
                     # Create homepage frame
                     homepage_view = HomePageView()
-                    HomePageView.showHomePageView(homepage_view, root)
+                    HomePageView.handle_Menu(homepage_view, root)
                 else:
                     show_login_error('Username or Password not correct.')
         
