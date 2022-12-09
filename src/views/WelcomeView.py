@@ -7,11 +7,11 @@ from PIL import Image, ImageTk
 import sys
 
 # setting path
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/controllers')
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
+# sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/controllers')
+# sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
 
-#sys.path.insert(1, 'C:/Users/XX') # @Charlotte: maybe you can add your path seperately then we can both test easier
-#sys.path.insert(1, 'C:/Users/XX')
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers') 
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
 
 from ModelMoneytor import ModelMoneytor
 from views.HomePageView import HomePageView
@@ -292,7 +292,7 @@ class WelcomeView():
         
         
         # show the logo at the start page
-        path_logo = 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/Bilder/MoneytorLogo.png'
+        path_logo = 'C:/Users/charl/Desktop/moneytor/images/MoneytorLogo.png'
         image = Image.open(path_logo)
         photo = ImageTk.PhotoImage(image)   #convert the image type
 
