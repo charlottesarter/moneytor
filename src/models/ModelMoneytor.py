@@ -74,6 +74,17 @@ class ModelMoneytor(object):
                 categories.append(transaction.category)
         
         return categories
+    
+    def getAllProjects(self):
+        
+        projects = []
+
+        for transaction in self.transactions:
+            
+            if transaction.project not in projects:
+                projects.append(transaction.project)
+        
+        return projects
 
     # Returns a dictionary : {'category':total of expenses in this category}
 
