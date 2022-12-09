@@ -3,6 +3,9 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 import tkinter as tk
 from tkinter import Menu, ttk
 
+import sys
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+
 from ModelMoneytor import ModelMoneytor
 #from views.WelcomeView import WelcomeView
 
