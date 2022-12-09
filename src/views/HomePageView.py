@@ -24,13 +24,14 @@ class HomePageView():
             # create widgets
             # project
             label_project = ttk.Label(main_frame, text='Project')
-            label_project.grid(column=0, row=1, sticky=tk.N, columnspan=4, padx=5, pady=5)
+            label_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
 
             default_project = tk.StringVar()
             # initial menu text
             default_project.set( "Life" )
-            dropdown_category = tk.OptionMenu(main_frame, default_project , *model.getAllProjects())  #TODO let the user create a new category
-            dropdown_category.grid(column=0, row=2, sticky=tk.N, columnspan=4, padx=5, pady=5)
+            dropdown_category = tk.OptionMenu(main_frame, default_project , *model.getAllProjects())  #TODO let the user create a new projects
+            dropdown_category.grid(column=0, row=2, sticky=tk.N, padx=5, pady=5)
+            #TODO get the input
             # project entry
             # project_var = tk.StringVar()
             # project_entry = ttk.Entry(main_frame, textvariable=project_var, width=30)
@@ -38,13 +39,13 @@ class HomePageView():
 
             # category
             label_category = ttk.Label(main_frame, text='Category')
-            label_category.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
+            label_category.grid(column=1, row=1, sticky=tk.N, padx=5, pady=5)
                 
             default_category = tk.StringVar()
             # initial menu text
             default_category.set( "Food" )
             dropdown_category = tk.OptionMenu(main_frame, default_category , *model.getAllCategories())  #TODO let the user create a new category
-            dropdown_category.grid(column=0, row=4, sticky=tk.E, padx=5, pady=5)
+            dropdown_category.grid(column=1, row=2, sticky=tk.N, padx=5, pady=5)
             # category entry
             # category_var = tk.StringVar()
             # category_entry = ttk.Entry(main_frame, textvariable=category_var, width=30)
