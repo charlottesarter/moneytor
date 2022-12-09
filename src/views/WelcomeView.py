@@ -284,7 +284,7 @@ class WelcomeView():
             label_logo.destroy()    #needs to be destroyed seperately because it sits in the root window
 
             homepage_view = HomePageView()
-            HomePageView.showHomePageView(homepage_view, root)
+            HomePageView.handle_Menu(homepage_view, root)
 
         # Welcome page
         

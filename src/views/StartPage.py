@@ -1,100 +1,52 @@
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import tkinter as tk
-from tkinter import Menu, ttk
 
-#from ModelMoneytor import ModelMoneytor
+# Create the main window
+window = tk.Tk()
 
+# Define the frames for the buttons and the pages
+buttons_frame = tk.Frame(window)
+pages_frame = tk.Frame(window)
 
-root = tk.Tk()
-root.geometry('800x450')
-root.title('Moneytor Application')
+# Create the buttons
+button1 = tk.Button(buttons_frame, text="Page 1", command=lambda: raise_frame(1))
+button2 = tk.Button(buttons_frame, text="Page 2", command=lambda: raise_frame(2))
+button3 = tk.Button(buttons_frame, text="Page 3", command=lambda: raise_frame(3))
 
-def showProjectsView():
+# Place the buttons on the buttons frame
+button1.pack()
+button2.pack()
+button3.pack()
 
-    frame_projects = tk.Frame(main_frame)
+# Create the frames for the pages
+page1 = tk.Frame(pages_frame)
+page2 = tk.Frame(pages_frame)
+page3 = tk.Frame(pages_frame)
 
-    label_welcome = ttk.Label(frame_projects, text='Welcome to the project page')
-    label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
+# Add widgets to the frames for the pages
+label1 = tk.Label(page1, text="This is page 1")
+label1.pack()
 
-    frame_projects.pack()
+label2 = tk.Label(page2, text="This is page 2")
+label2.pack()
 
+label3 = tk.Label(page3, text="This is page 3")
+label3.pack()
 
-def showVisualizeView():
-    frame_visualize = tk.Frame(main_frame)
+# Create a function to raise the desired frame
+def raise_frame(frame_number):
+    if frame_number == 1:
+        page1.tkraise()
+    elif frame_number == 2:
+        page2.tkraise()
+    elif frame_number == 3:
+        page3.tkraise()
 
-    label_welcome = ttk.Label(frame_visualize, text='Welcome to the visualize page')
-    label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
+# Place the frames on the main window
+buttons_frame.pack()
+pages_frame.pack()
 
-    frame_visualize.pack()
+# Start with page 1 raised
+raise_frame(1)
 
-
-def showHomePageView():
-    #model = ModelMoneytor()
-
-    # create homepage frame
-    frame_homepage = tk.Frame(main_frame)
-
-    label_welcome = ttk.Label(frame_homepage, text='Homepage')
-    label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
-            
-    frame_homepage.pack()
-    
-def showAboutView():
-    frame_about = tk.Frame(main_frame)
-
-    label_welcome = ttk.Label(frame_about, text='About')
-    label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
-            
-    frame_about.pack()
-
-def indicate(lb, page): # hide indicator after clicking to the next page
-    hide_indicators()
-    lb.configure(bg='#158aff')
-    delete_pages()
-    page()  # showing the next page
-    
-def hide_indicators():
-    home_indicate.config(bg='#c3c3c3')
-    menu_indicate.config(bg='#c3c3c3')
-    contact_indicate.config(bg='#c3c3c3')
-    about_indicate.config(bg='#c3c3c3')
-        
-def delete_pages(): # clear page before dispalying the next one
-    for frame in main_frame.winfo_children():
-        frame.destroy()
-
-options_frame = tk.Frame(root, bg='#c3c3c3')
-
-#the button itself
-home_btn = tk.Button(options_frame, text='Home', font=('Bold', 15), fg='#158aff', bd=0, bg='#c3c3c3', command=lambda: indicate(home_indicate, showHomePageView))
-home_btn.place(x=10,y=50)
-#the coloured indicator on the left
-home_indicate = tk.Label(options_frame, text='', bg='#c3c3c3')
-home_indicate.place(x=3,y=50,width=5,height=40)
-
-menu_btn = tk.Button(options_frame, text='Menu', font=('Bold', 15), fg='#158aff', bd=0, bg='#c3c3c3', command=lambda: indicate(menu_indicate, showProjectsView))
-menu_btn.place(x=10,y=100)
-menu_indicate = tk.Label(options_frame, text='', bg='#c3c3c3')
-menu_indicate.place(x=3,y=100,width=5,height=40)
-
-contact_btn = tk.Button(options_frame, text='Contact', font=('Bold', 15), fg='#158aff', bd=0, bg='#c3c3c3', command=lambda: indicate(contact_indicate, showVisualizeView))
-contact_btn.place(x=10,y=150)
-contact_indicate = tk.Label(options_frame, text='', bg='#c3c3c3')
-contact_indicate.place(x=3,y=150,width=5,height=40)
-
-about_btn = tk.Button(options_frame, text='About', font=('Bold', 15), fg='#158aff', bd=0, bg='#c3c3c3', command=lambda: indicate(about_indicate, showAboutView))
-about_btn.place(x=10,y=200)
-about_indicate = tk.Label(options_frame, text='', bg='#c3c3c3')
-about_indicate.place(x=3,y=200,width=5,height=40)
-
-options_frame.pack(side=tk.LEFT)
-options_frame.pack_propagate(False)
-options_frame.configure(width=100, height=400)
-
-main_frame = tk.Frame(root, highlightbackground='black', highlightthickness=2)
-main_frame.pack(side=tk.LEFT)
-main_frame.pack_propagate(False)
-main_frame.configure(width=500, height=400)
-
-root.mainloop()
+# Start the main event loop
+window.mainloop()
