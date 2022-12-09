@@ -1,5 +1,6 @@
 # Moneytor model (singleton)
 
+from models.Project import Project
 from models.Currency import Currency
 from models.Transaction import Transaction
 from models.User import User
@@ -35,6 +36,23 @@ class ModelMoneytor(object):
         # Remove the titles of the file transactions.csv
         self.transactions.pop(0)
 
+        # The list of all the projects of one user 
+
+        projects_names = []
+        self.projects = []
+
+        for transaction in self.transactions:
+            if transaction.project not in projects_names:
+                projects_names.append(transaction.project) # Add the name of the project in the list of projects' names
+                self.projects.append(Project(transaction.project)) # Create a new project and add it to the model
+
+        # Add all the corresponding transactions to the projects
+
+        for transaction in self.transactions:
+            for project in self.projects:
+                if transaction.project == project.name:
+                    project.addTransaction(transaction)
+            
         # Save the current user who is logged in the app
         self.user_logged = ''
 
@@ -75,16 +93,8 @@ class ModelMoneytor(object):
         
         return categories
     
-    def getAllProjects(self):
-        
-        projects = []
-
-        for transaction in self.transactions:
-            
-            if transaction.project not in projects:
-                projects.append(transaction.project)
-        
-        return projects
+    def getAllProjects(self):  
+        return self.projects
 
     # Returns a dictionary : {'category':total of expenses in this category}
 

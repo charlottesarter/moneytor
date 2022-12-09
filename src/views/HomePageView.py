@@ -1,7 +1,8 @@
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import tkinter as tk
-from tkinter import Menu, ttk
+from tkinter import END, Menu, ttk
+from tkinter import *
 
 import sys
 sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
@@ -48,8 +49,8 @@ class HomePageView():
                 
             default_category = tk.StringVar()
             # initial menu text
-            default_category.set( "Food" )
-            dropdown_category = tk.OptionMenu(main_frame, default_category , *model.getAllCategories())  #TODO let the user create a new category
+            default_category.set("Food")
+            dropdown_category = tk.OptionMenu(main_frame, default_category, *model.getAllCategories())  #TODO let the user create a new category
             dropdown_category.grid(column=1, row=2, sticky=tk.N, columnspan=2, padx=5, pady=5)
             # category entry
             # category_var = tk.StringVar()
@@ -97,22 +98,37 @@ class HomePageView():
             for widget in main_frame.winfo_children():
                 widget.destroy()
 
-            label_welcome = ttk.Label(main_frame, text='Select a project to display its key information')
-            label_welcome.grid(column=0, row=0, sticky=tk.N, padx=5, pady=5)
+            label_welcome = ttk.Label(main_frame, text='Here is the key information of all of your projects')
+            label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            
+            my_project = ttk.Treeview(main_frame)
 
-            # project
-            label_project = ttk.Label(main_frame, text='Project')
-            label_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+            my_project['columns'] = ('project_name', 'total_expenses', 'total_incomes', 'sold')
 
-            default_project = tk.StringVar()
-            # initial menu text
-            default_project.set( "Daily Life" )
-            dropdown_category = tk.OptionMenu(main_frame, default_project , *model.getAllProjects())
-            dropdown_category.grid(column=1, row=1, sticky=tk.N, padx=5, pady=5)
+            my_project.column("#0", width=0,  stretch=NO)
+            my_project.column("project_name",anchor=CENTER, width=80)
+            my_project.column("total_expenses",anchor=CENTER,width=80)
+            my_project.column("total_incomes",anchor=CENTER,width=80)
+            my_project.column("sold",anchor=CENTER,width=80)
 
+            my_project.heading("#0",text="",anchor=CENTER)
+            my_project.heading("project_name",text="Name",anchor=CENTER)
+            my_project.heading("total_expenses",text="Expenses",anchor=CENTER)
+            my_project.heading("total_incomes",text="Incomes",anchor=CENTER)
+            my_project.heading("sold",text="Sold",anchor=CENTER)
 
+            # Get all the project and their key information
 
-            main_frame.pack()
+            model = ModelMoneytor()
+
+            projects_info = []
+            for project in model.getAllProjects():
+                projects_info.append(project.getKeyInfo())
+
+            for i in range(len(projects_info)):
+                my_project.insert(parent='',index='end',iid=i,text='', values=projects_info[i])
+
+            my_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
 
         ####################### VISUALIZE #######################
         def showVisualize():

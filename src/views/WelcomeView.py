@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, Toplevel
+from tkinter import *
 from tkinter.messagebox import showinfo
 import time
 from PIL import Image, ImageTk
