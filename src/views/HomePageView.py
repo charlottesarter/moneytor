@@ -6,14 +6,8 @@ from tkinter import END, Menu, ttk
 from tkinter import *
 
 import sys
-<<<<<<< HEAD
 
 sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
-=======
-# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
-
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
->>>>>>> 5bac4264e9cc86f79bd9266e48cc90a24f5985b8
 
 from ModelMoneytor import ModelMoneytor
 from Transaction import Transaction
@@ -141,24 +135,10 @@ class HomePageView():
             label_currency.grid(column=3, row=3, sticky=tk.N, padx=5, pady=5)
 
             # currency entry
-<<<<<<< HEAD
             currency_var = tk.StringVar()
             currency_var.set('EUR')
             dropdown_currency = tk.OptionMenu(main_frame, currency_var, *['EUR', 'KRW', 'USD'])  #TODO let the user create a new projects
             dropdown_currency.grid(column=2, row=4, sticky=tk.N, columnspan=2, padx=5, pady=5)
-=======
-            # currency_var = tk.IntVar()
-            # currency_entry = ttk.Spinbox(main_frame, textvariable=currency_var, from_=0, width=30)
-            # currency_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
-            
-            currency_var = tk.IntVar()
-            eur = ttk.Radiobutton(main_frame, text='EUR', variable=currency_var, value=1) # Currency['EUR'].value
-            krw = ttk.Radiobutton(main_frame, text='KRW', variable=currency_var, value=2)
-            usd = ttk.Radiobutton(main_frame, text='USD', variable=currency_var, value=3)
-            eur.grid(row=4, column=2, sticky=tk.W, padx=5, pady=5)
-            krw.grid(row=4, column=3, sticky=tk.N, padx=5, pady=5)
-            usd.grid(row=4, column=4, sticky=tk.E, padx=5, pady=5)
->>>>>>> 5bac4264e9cc86f79bd9266e48cc90a24f5985b8
 
             # expense button
             expense_button = ttk.Button(main_frame, text='Expense', command=addExpense) # TODO : define the command of the button 
