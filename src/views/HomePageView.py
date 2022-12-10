@@ -17,7 +17,7 @@ from Transaction import Transaction
 class HomePageView():
     
     def handleMenu(self, root):
-        
+
         ####################### HOMEPAGE #######################
         def showHomePage():
 
