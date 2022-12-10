@@ -23,6 +23,9 @@ class HomePageView():
                 widget.destroy()
                 
             model = ModelMoneytor()
+            
+            def addFinance():
+                pass
 
             text_hello = 'What\'s new today' + model.user_logged + '?'  # TODO display name
             print('name:', model.user_logged)
