@@ -110,7 +110,7 @@ class ModelMoneytor(object):
 
         for transaction in self.transactions:
             if transaction.category in exp_by_cat:
-                if transaction.expense == 'True':
+                if transaction.expense:
                     # We have to convert all the expenses in the same currency (EUR)
                     if int(transaction.currency) == Currency['KRW'].value:
                         exp_by_cat[transaction.category] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -119,7 +119,7 @@ class ModelMoneytor(object):
                     elif int(transaction.currency) == Currency['EUR'].value:
                         exp_by_cat[transaction.category] += float(transaction.amount)
             else:
-                if transaction.expense == 'True':
+                if transaction.expense:
                     # We have to convert all the expenses in the same currency (EUR)
                     if int(transaction.currency) == Currency['KRW'].value:
                         exp_by_cat[transaction.category] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -151,7 +151,7 @@ class ModelMoneytor(object):
         for transaction in self.transactions:
             if transaction.year == year:
                 if transaction.month in exp_by_month:
-                    if transaction.expense == 'True':
+                    if transaction.expense:
                         # We have to convert all the expenses in the same currency (EUR)
                         if int(transaction.currency) == Currency['KRW'].value:
                             exp_by_month[transaction.month] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -161,7 +161,7 @@ class ModelMoneytor(object):
                             exp_by_month[transaction.month] += float(transaction.amount)
                 else:
                     if transaction.year == year:
-                        if transaction.expense == 'True':
+                        if transaction.expense:
                             # We have to convert all the expenses in the same currency (EUR)
                             if int(transaction.currency) == Currency['KRW'].value:
                                 exp_by_month[transaction.month] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
