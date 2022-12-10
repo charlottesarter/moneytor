@@ -7,7 +7,9 @@ from tkinter import *
 
 import sys
 
-sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+
+sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
 
 from ModelMoneytor import ModelMoneytor
 from Transaction import Transaction
@@ -47,6 +49,7 @@ class HomePageView():
 
                 # Add the expense to the model
                 model.addTransaction(line)
+                showAddSuccess('Your Expense has been added successfully!')
 
             def addIncome():
 
@@ -76,6 +79,7 @@ class HomePageView():
 
                 # Add the income to the model
                 model.addTransaction(line)
+                showAddSuccess('Your Income has been added successfully!')
 
             def getAmount():
                 return amount_entry.get()
@@ -98,8 +102,27 @@ class HomePageView():
 
             def getDescription():
                 return description_entry.get()
+            
+            def showAddSuccess(text):
+                label_add_sucess = tk.Label(main_frame, text=text, fg='green')
+                label_add_sucess.grid(column=0, row=10, sticky=tk.S, columnspan=3, padx=5, pady=5)
+                label_add_sucess.after(3000, label_add_sucess.destroy)
+                
+            def addCategory():
+                popup = tk.Tk()
+                popup.withdraw()
+                # the input dialog
+                USER_INP = tk.simpledialog.askstring(title="add Category", prompt="Which Category would you like to add?")
+                category_var.set(USER_INP)
+                
+            def addProject():
+                popup = tk.Tk()
+                popup.withdraw()
+                # the input dialog
+                USER_INP = tk.simpledialog.askstring(title="add Project", prompt="Which Project would you like to add?")
+                project_var.set(USER_INP)
 
-            for widget in main_frame.winfo_children():
+            for widget in main_frame.winfo_children():  #destroying the old frame
                 widget.destroy()
                 
             model = ModelMoneytor()
@@ -110,68 +133,65 @@ class HomePageView():
             # create widgets
             # project
             label_project = ttk.Label(main_frame, text='Project')
-            label_project.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_project.grid(row=1, column=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
 
             project_var = tk.StringVar()
             # initial menu text
             project_var.set('Daily Life')
             dropdown_project = tk.OptionMenu(main_frame, project_var , *model.getAllProjectsName())  #TODO let the user create a new projects
-            dropdown_project.grid(column=0, row=2, sticky=tk.N, columnspan=2, padx=5, pady=5)
-            #TODO get the input
-            # project entry
-            # project_var = tk.StringVar()
-            # project_entry = ttk.Entry(main_frame, textvariable=project_var, width=30)
-            # project_entry.grid(column=0, row=2, sticky=tk.N, columnspan=4, padx=5, pady=5)
+            dropdown_project.grid(row=2, column=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            
+            add_project_button = ttk.Button(main_frame, text='add Project', command=addProject) 
+            add_project_button.grid(row=3, column=0, sticky=tk.N, columnspan=4, padx=5, pady=30)
 
             # category
             label_category = ttk.Label(main_frame, text='Category')
-            label_category.grid(column=1, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_category.grid(row=1, column=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
                 
             category_var = tk.StringVar()
             # initial menu text
             category_var.set('Food')
             dropdown_category = tk.OptionMenu(main_frame, category_var, *model.getAllCategories())  #TODO let the user create a new category
-            dropdown_category.grid(column=1, row=2, sticky=tk.N, columnspan=2, padx=5, pady=5)
-            # category entry
-            # category_var = tk.StringVar()
-            # category_entry = ttk.Entry(main_frame, textvariable=category_var, width=30)
-            # category_entry.grid(column=0, row=4, sticky=tk.E, padx=5, pady=5)
+            dropdown_category.grid(row=2, column=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            
+            add_category_button = ttk.Button(main_frame, text='add Category', command=addCategory) 
+            add_category_button.grid(row=3, column=1, sticky=tk.N, columnspan=4, padx=5, pady=30)
 
             # description
             label_description = ttk.Label(main_frame, text='Description')
-            label_description.grid(column=0, row=3, sticky=tk.N, padx=5, pady=5)
+            label_description.grid(column=0, row=4, sticky=tk.N, padx=5, pady=5)
 
             # category entry
             description_var = tk.StringVar()
             description_entry = ttk.Entry(main_frame, textvariable=description_var, width=30)
-            description_entry.grid(column=0, row=4, sticky=tk.E, padx=5, pady=5)
+            description_entry.grid(column=0, row=5, sticky=tk.E, padx=5, pady=5)
 
             # amount
             label_amount = ttk.Label(main_frame, text='Amount')
-            label_amount.grid(column=1, row=3, sticky=tk.N, padx=5, pady=5)
+            label_amount.grid(column=1, row=4, sticky=tk.N, padx=5, pady=5)
 
             # amount entry
             amount_var = tk.IntVar()
             amount_entry = ttk.Spinbox(main_frame, from_=0, to=float('+inf'), textvariable=amount_var, width=30)
-            amount_entry.grid(column=1, row=4, sticky=tk.E, padx=5, pady=5)
+            amount_entry.grid(column=1, row=5, sticky=tk.E, padx=5, pady=5)
 
             # currency
             label_currency = ttk.Label(main_frame, text='Currency')
-            label_currency.grid(column=3, row=3, sticky=tk.N, padx=5, pady=5)
+            label_currency.grid(column=3, row=4, sticky=tk.N, padx=5, pady=5)
 
             # currency entry
             currency_var = tk.StringVar()
             currency_var.set('EUR')
             dropdown_currency = tk.OptionMenu(main_frame, currency_var, *['EUR', 'KRW', 'USD'])  #TODO let the user create a new projects
-            dropdown_currency.grid(column=2, row=4, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            dropdown_currency.grid(column=2, row=5, sticky=tk.N, columnspan=2, padx=5, pady=5)
 
             # expense button
             expense_button = ttk.Button(main_frame, text='Expense', command=addExpense) # TODO : define the command of the button 
-            expense_button.grid(column=0, row=6, sticky=tk.S, columnspan=4, padx=5, pady=30)
+            expense_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=30)
 
             # income button
             income_button = ttk.Button(main_frame, text='Income', command=addIncome) # TODO : define the command of the button 
-            income_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=5)
+            income_button.grid(column=0, row=8, sticky=tk.S, columnspan=4, padx=5, pady=5)
 
         ####################### PROJECTS #######################
         def showProjects():
@@ -184,19 +204,19 @@ class HomePageView():
             
             my_project = ttk.Treeview(main_frame)
 
-            my_project['columns'] = ('project_name', 'total_expenses', 'total_incomes', 'sold')
+            my_project['columns'] = ('project_name', 'total_expenses', 'total_incomes', 'total')
 
             my_project.column("#0", width=0,  stretch=NO)
             my_project.column("project_name",anchor=CENTER, width=80)
             my_project.column("total_expenses",anchor=CENTER,width=80)
             my_project.column("total_incomes",anchor=CENTER,width=80)
-            my_project.column("sold",anchor=CENTER,width=80)
+            my_project.column("total",anchor=CENTER,width=80)
 
             my_project.heading("#0",text="",anchor=CENTER)
             my_project.heading("project_name",text="Name",anchor=CENTER)
             my_project.heading("total_expenses",text="Expenses",anchor=CENTER)
             my_project.heading("total_incomes",text="Incomes",anchor=CENTER)
-            my_project.heading("sold",text="Sold",anchor=CENTER)
+            my_project.heading("total",text="total",anchor=CENTER)
 
             # Get all the project and their key information
 
