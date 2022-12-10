@@ -164,7 +164,6 @@ class ModelMoneytor(object):
                        
                     exp_by_cat[transaction.category] += cr.convert(from_currency, to_currency, transaction.amount)  # converts to the preferred currency
                 
-  
         print(exp_by_cat)
         return exp_by_cat
         
