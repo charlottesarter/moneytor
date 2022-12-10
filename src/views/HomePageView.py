@@ -43,7 +43,7 @@ class HomePageView():
                 line += 'True,'
 
                 # 7th : the date of the day
-                line += datetime.datetime.today().strftime('%Y%m%d')
+                line += datetime.datetime.today().strftime('%Y%m%d') + '\n'
 
                 # Add the expense to the model
                 model.addTransaction(line)
@@ -72,7 +72,7 @@ class HomePageView():
                 line += 'False,'
 
                 # 7th : the date of the day
-                line += datetime.datetime.today().strftime('%Y%m%d')
+                line += datetime.datetime.today().strftime('%Y%m%d') + '\n'
 
                 # Add the income to the model
                 model.addTransaction(line)
