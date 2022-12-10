@@ -113,14 +113,15 @@ class HomePageView():
                 popup.withdraw()
                 # the input dialog
                 USER_INP = tk.simpledialog.askstring(title="add Category", prompt="Which Category would you like to add?")
-                category_var.set(USER_INP)
+                if(USER_INP):   # to make sure a new one was added
+                    category_var.set(USER_INP)
                 
             def addProject():
                 popup = tk.Tk()
                 popup.withdraw()
-                # the input dialog
                 USER_INP = tk.simpledialog.askstring(title="add Project", prompt="Which Project would you like to add?")
-                project_var.set(USER_INP)
+                if(USER_INP):
+                    project_var.set(USER_INP)
 
             for widget in main_frame.winfo_children():  #destroying the old frame
                 widget.destroy()
@@ -142,7 +143,7 @@ class HomePageView():
             dropdown_project.grid(row=2, column=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
             
             add_project_button = ttk.Button(main_frame, text='add Project', command=addProject) 
-            add_project_button.grid(row=3, column=0, sticky=tk.N, columnspan=4, padx=5, pady=30)
+            add_project_button.grid(row=3, column=0, sticky=tk.NW, columnspan=4, padx=5, pady=30)
 
             # category
             label_category = ttk.Label(main_frame, text='Category')
@@ -155,7 +156,7 @@ class HomePageView():
             dropdown_category.grid(row=2, column=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
             
             add_category_button = ttk.Button(main_frame, text='add Category', command=addCategory) 
-            add_category_button.grid(row=3, column=1, sticky=tk.N, columnspan=4, padx=5, pady=30)
+            add_category_button.grid(row=3, column=1, sticky=tk.NE, columnspan=4, padx=5, pady=30)
 
             # description
             label_description = ttk.Label(main_frame, text='Description')
