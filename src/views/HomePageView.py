@@ -47,9 +47,12 @@ class HomePageView():
                 # 7th : the date of the day
                 line += datetime.datetime.today().strftime('%Y%m%d') + '\n'
 
-                # Add the expense to the model
-                model.addTransaction(line)
-                showAddSuccess('Your Expense has been added successfully!')
+                if(str(getAmount()) == '' or str(getDescription()) == ''):
+                    showInputError()
+                else:
+                    # Add the expense to the model
+                    model.addTransaction(line)
+                    showAddSuccess('Your Expense has been added successfully!')
 
             def addIncome():
 
@@ -77,10 +80,14 @@ class HomePageView():
                 # 7th : the date of the day
                 line += datetime.datetime.today().strftime('%Y%m%d') + '\n'
 
-                # Add the income to the model
-                model.addTransaction(line)
-                showAddSuccess('Your Income has been added successfully!')
 
+                if(str(getAmount()) == '' or str(getDescription()) == ''):
+                    showInputError()
+                else:
+                    # Add the income to the model
+                    model.addTransaction(line)
+                    showAddSuccess('Your Income has been added successfully!')
+                    
             def getAmount():
                 return amount_entry.get()
 
@@ -107,6 +114,11 @@ class HomePageView():
                 label_add_sucess = tk.Label(main_frame, text=text, fg='green')
                 label_add_sucess.grid(column=0, row=10, sticky=tk.S, columnspan=3, padx=5, pady=5)
                 label_add_sucess.after(3000, label_add_sucess.destroy)
+                
+            def showInputError():
+                label_add_sucess = tk.Label(main_frame, text='One or more fields are empty!', fg='red')
+                label_add_sucess.grid(column=0, row=10, sticky=tk.S, columnspan=3, padx=5, pady=5)
+                label_add_sucess.after(4000, label_add_sucess.destroy)
                 
             def addCategory():
                 popup = tk.Tk()
