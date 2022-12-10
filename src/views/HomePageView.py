@@ -45,8 +45,36 @@ class HomePageView():
                 # 7th : the date of the day
                 line += datetime.datetime.today().strftime('%Y%m%d')
 
-                print(line)
+                # Add the expense to the model
+                model.addTransaction(line)
 
+            def addIncome():
+
+                # Build the line to insert in the file
+                line = ''
+
+                # 1st : the amount of the transaction
+                line += str(getAmount()) + ','
+
+                # 2nd : the currency 
+                line += str(getCurrency()) + ','
+
+                # 3rd : the project 
+                line += str(getProject()) + ','
+
+                # 4th : the category
+                line += str(getCategory()) + ','
+
+                # 5th : the description
+                line += str(getDescription()) + ','
+
+                # 6th : expense (true) or income (false)
+                line += 'False,'
+
+                # 7th : the date of the day
+                line += datetime.datetime.today().strftime('%Y%m%d')
+
+                # Add the income to the model
                 model.addTransaction(line)
 
             def getAmount():
@@ -76,9 +104,6 @@ class HomePageView():
                 
             model = ModelMoneytor()
             
-            def addFinance():
-                pass
-
             label_homepage = tk.Label(main_frame, text='What\'s new today ' + model.getUserLogged() + ' ?')
             label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
 
@@ -145,7 +170,7 @@ class HomePageView():
             expense_button.grid(column=0, row=6, sticky=tk.S, columnspan=4, padx=5, pady=30)
 
             # income button
-            income_button = ttk.Button(main_frame, text='Income') # TODO : define the command of the button 
+            income_button = ttk.Button(main_frame, text='Income', command=addIncome) # TODO : define the command of the button 
             income_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=5)
 
         ####################### PROJECTS #######################
