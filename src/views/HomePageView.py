@@ -79,12 +79,20 @@ class HomePageView():
 
             # currency
             label_currency = ttk.Label(main_frame, text='Currency')
-            label_currency.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
+            label_currency.grid(column=3, row=3, sticky=tk.N, padx=5, pady=5)
 
             # currency entry
+            # currency_var = tk.IntVar()
+            # currency_entry = ttk.Spinbox(main_frame, textvariable=currency_var, from_=0, width=30)
+            # currency_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
+            
             currency_var = tk.IntVar()
-            currency_entry = ttk.Spinbox(main_frame, textvariable=currency_var, from_=0, width=30)
-            currency_entry.grid(column=2, row=4, sticky=tk.E, padx=5, pady=5)
+            eur = ttk.Radiobutton(main_frame, text='EUR', variable=currency_var, value=1) # Currency['EUR'].value
+            krw = ttk.Radiobutton(main_frame, text='KRW', variable=currency_var, value=2)
+            usd = ttk.Radiobutton(main_frame, text='USD', variable=currency_var, value=3)
+            eur.grid(row=4, column=2, sticky=tk.W, padx=5, pady=5)
+            krw.grid(row=4, column=3, sticky=tk.N, padx=5, pady=5)
+            usd.grid(row=4, column=4, sticky=tk.E, padx=5, pady=5)
 
             # expense button
             expense_button = ttk.Button(main_frame, text='Expense') # TODO : define the command of the button 
@@ -207,8 +215,9 @@ class HomePageView():
 
         main_frame.pack()
 
+        showHomePage()      # to have the Homepage as the first page showing up when opening the app
 
-        ############# Create a menubar #############
+        #################### Create a menubar ####################
         menubar = Menu(root)
         root.config(menu=menubar)
 
