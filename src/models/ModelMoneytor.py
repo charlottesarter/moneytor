@@ -4,6 +4,7 @@ from models.Project import Project
 from models.Currency import Currency
 from models.Transaction import Transaction
 from models.User import User
+from forex_python.converter import CurrencyRates    # please install: pip install forex-python
 
 class ModelMoneytor(object):
 
@@ -128,6 +129,20 @@ class ModelMoneytor(object):
                         exp_by_cat[transaction.category] = float(transaction.amount)
   
         return exp_by_cat
+    
+    def getExpensesByCategory2(self):
+        #get preferred currency
+        if(self.user_logged.preferred_currency == Currency['KRW'].value):               #I don't know how to get the preferred currency here
+            to_currency = 'KRW'
+        elif(self.user_logged.preferred_currency == Currency['USD'].value):
+            to_currency = 'USD'
+        elif(self.user_logged.preferred_currency == Currency['EUR'].value):
+            to_currency = 'EUR'
+        else:
+            print('preferred currency not found')
+          
+        cr = CurrencyRates()
+        exp_by_cat = {}
 
     def getExpensesByMonth(self, year):
 
@@ -182,3 +197,4 @@ class ModelMoneytor(object):
 
 moneytor = ModelMoneytor()
 
+moneytor = ModelMoneytor()
