@@ -14,6 +14,34 @@ class Transaction:
         self.description = infos[4]
         self.expense = infos[5]
         self.date = infos[6]
+        self.year = self.date[:4]
+
+        if self.date[4:6] == '01':
+            self.month = 'jan'
+        elif self.date[4:6] == '02':
+            self.month = 'feb'
+        elif self.date[4:6] == '03':
+            self.month = 'march'
+        elif self.date[4:6] == '04':
+            self.month = 'april'
+        elif self.date[4:6] == '05':
+            self.month = 'may'
+        elif self.date[4:6] == '06':
+            self.month = 'june'
+        elif self.date[4:6] == '07':
+            self.month = 'july'
+        elif self.date[4:6] == '08':
+            self.month = 'aug'
+        elif self.date[4:6] == '09':
+            self.month = 'sept'
+        elif self.date[4:6] == '10':
+            self.month = 'oct'
+        elif self.date[4:6] == '11':
+            self.month = 'nov'
+        elif self.date[4:6] == '12':
+            self.month = 'dec'
+
+        self.day = self.date[6:]
 
     # Return a finance the way it should be in the csv file
     def asInFile(self):

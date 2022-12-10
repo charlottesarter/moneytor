@@ -38,12 +38,12 @@ class ModelMoneytor(object):
 
         # The list of all the projects of one user 
 
-        projects_names = []
+        self.projects_names = []
         self.projects = []
 
         for transaction in self.transactions:
-            if transaction.project not in projects_names:
-                projects_names.append(transaction.project) # Add the name of the project in the list of projects' names
+            if transaction.project not in self.projects_names:
+                self.projects_names.append(transaction.project) # Add the name of the project in the list of projects' names
                 self.projects.append(Project(transaction.project)) # Create a new project and add it to the model
 
         # Add all the corresponding transactions to the projects
@@ -54,7 +54,9 @@ class ModelMoneytor(object):
                     project.addTransaction(transaction)
             
         # Save the current user who is logged in the app
-        self.user_logged = ''
+        fd = open('data/user_logged.txt', 'r')
+        self.user_logged = fd.read()
+        fd.close()
 
     # Make sure that there is only one model (singleton)
 
@@ -93,6 +95,9 @@ class ModelMoneytor(object):
         
         return categories
     
+    def getAllProjectsName(self):  
+        return self.projects_names
+    
     def getAllProjects(self):  
         return self.projects
 
@@ -122,8 +127,58 @@ class ModelMoneytor(object):
                     elif int(transaction.currency) == Currency['EUR'].value:
                         exp_by_cat[transaction.category] = float(transaction.amount)
   
-        print(exp_by_cat)
         return exp_by_cat
+
+    def getExpensesByMonth(self, year):
+
+        exp_by_month = {}
+
+        for transaction in self.transactions:
+            if transaction.year == year:
+                if transaction.month in exp_by_month:
+                    if transaction.expense:
+                        # We have to convert all the expenses in the same currency (EUR)
+                        if int(transaction.currency) == Currency['KRW'].value:
+                            exp_by_month[transaction.month] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
+                        elif int(transaction.currency) == Currency['USD'].value:
+                            exp_by_month[transaction.month] += float(transaction.amount) * 0.9503275 # current rate from the 7th of december
+                        elif int(transaction.currency) == Currency['EUR'].value:
+                            exp_by_month[transaction.month] += float(transaction.amount)
+                else:
+                    if transaction.year == year:
+                        if transaction.expense:
+                            # We have to convert all the expenses in the same currency (EUR)
+                            if int(transaction.currency) == Currency['KRW'].value:
+                                exp_by_month[transaction.month] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
+                            elif int(transaction.currency) == Currency['USD'].value:
+                                exp_by_month[transaction.month] = float(transaction.amount) * 0.9503275 # current rate from the 7th of december
+                            elif int(transaction.currency) == Currency['EUR'].value:
+                                exp_by_month[transaction.month] = float(transaction.amount)
+  
+        return exp_by_month
+
+    # Update the username of the logged user
+
+    def setUserLogged(self, username):
+        fd = open('data/user_logged.txt', 'r+')
+
+        # Delete the name of the previous logged user
+        fd.truncate(0)
+
+        # Write the name of the new user logged
+        fd.write(username)
+
+        fd.close()
+
+    def getUserLogged(self):
+        return str(self.user_logged)
+
+    def addTransaction(self, line):
+
+        # Add the expense in the transactions file
+        fd = open('data/transactions.csv', 'a')
+        fd.write(line)
+        fd.close() 
 
 moneytor = ModelMoneytor()
 
