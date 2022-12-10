@@ -4,6 +4,7 @@ from models.Project import Project
 from models.Currency import Currency
 from models.Transaction import Transaction
 from models.User import User
+from forex_python.converter import CurrencyRates    # please install: pip install forex-python
 
 class ModelMoneytor(object):
 
@@ -124,6 +125,48 @@ class ModelMoneytor(object):
   
         print(exp_by_cat)
         return exp_by_cat
+    
+    def getExpensesByCategory2(self):
+        #get preferred currency
+        if(self.user_logged.preferred_currency == Currency['KRW'].value):               #I don't know how to get the preferred currency here
+            to_currency = 'KRW'
+        elif(self.user_logged.preferred_currency == Currency['USD'].value):
+            to_currency = 'USD'
+        elif(self.user_logged.preferred_currency == Currency['EUR'].value):
+            to_currency = 'EUR'
+        else:
+            print('preferred currency not found')
+          
+        cr = CurrencyRates()
+        exp_by_cat = {}
+
+        for transaction in self.transactions:
+            if transaction.category in exp_by_cat:
+                if transaction.expense:
+                    # We have to convert all the expenses in the preferred currency
+                    if int(transaction.currency) == Currency['KRW'].value:
+                        from_currency = 'KRW'
+                    elif int(transaction.currency) == Currency['USD'].value:
+                        from_currency = 'USD'
+                    elif int(transaction.currency) == Currency['EUR'].value:
+                        from_currency = 'EUR'
+                    
+                    exp_by_cat[transaction.category] += cr.convert(from_currency, to_currency, transaction.amount)  # converts to the preferred currency
+            else:
+                if transaction.expense:
+                    # We have to convert all the expenses in the preferred currency
+                    if int(transaction.currency) == Currency['KRW'].value:
+                        from_currency = 'KRW'
+                    elif int(transaction.currency) == Currency['USD'].value:
+                        from_currency = 'USD'
+                    elif int(transaction.currency) == Currency['EUR'].value:
+                       from_currency = 'EUR'
+                       
+                    exp_by_cat[transaction.category] += cr.convert(from_currency, to_currency, transaction.amount)  # converts to the preferred currency
+                
+  
+        print(exp_by_cat)
+        return exp_by_cat
+        
 
 moneytor = ModelMoneytor()
-
