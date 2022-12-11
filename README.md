@@ -1,6 +1,6 @@
 # Moneytor (💸 + 👀)
 
-![Moneytor Logo](/assets/images/tux.png)
+![Moneytor Logo](/assets/images/MoneytorLogo.png)
 
 ## What is the concept of Moneytor?
 
@@ -61,6 +61,9 @@ We managed to implement **most of the features** that we wanted to have for our 
 - Provide more filters to display more precise and customized plots
 - better verify the user's input (that is easy to do but just takes time)
 - make the interface more appealing
+- check if new user is already registered
+- don't use the name to distinguish between two people
+- chose which currency you want to look at for the plots
 
 ## Authors 
 
