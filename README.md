@@ -40,7 +40,7 @@ If you want to find out more about our application and how to use it, you can ha
 
 You will find all of the libraries that you need to install to run our application, and some explanations about the different features of the GUI.
 
-## What we did for the term project
+## What we did for the term project 🎯
 
 We managed to implement **most of the features** that we wanted to have for our application, and a little bit more :)
 
