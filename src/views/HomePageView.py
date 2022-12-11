@@ -6,10 +6,7 @@ from tkinter import END, Menu, ttk
 from tkinter import *
 
 import sys
-
-# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
-
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
+sys.path.insert(1, './src/models')
 
 from ModelMoneytor import ModelMoneytor
 from Transaction import Transaction
@@ -226,23 +223,23 @@ class HomePageView():
             elif(model.getPreferedCurrecy() == Currency['EUR'].value):
                 pref_curr = ' (EUR)'
             else:
-                pref_curr = '(we are experiencing some currency issues...sorry:/)'
+                pref_curr = '(We are experiencing some currency issues... Sorry :/)'
 
             label_welcome = ttk.Label(main_frame, text='Here is the key information of all of your projects')
-            label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_welcome.grid(column=0, row=0, sticky=tk.NS, columnspan=2, padx=5, pady=5)
             
-            label_curr = ttk.Label(main_frame, text='all finances are displayed in ' + pref_curr)
-            label_curr.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_curr = ttk.Label(main_frame, text='All transactions are displayed in' + pref_curr)
+            label_curr.grid(column=0, row=1, sticky=tk.NS, columnspan=2, padx=5, pady=5)
             
             my_project = ttk.Treeview(main_frame)
 
             my_project['columns'] = ('project_name', 'total_expenses', 'total_incomes', 'total')
 
             my_project.column("#0", width=0,  stretch=NO)
-            my_project.column("project_name",anchor=CENTER, width=80)
-            my_project.column("total_expenses",anchor=CENTER,width=80)
-            my_project.column("total_incomes",anchor=CENTER,width=80)
-            my_project.column("total",anchor=CENTER,width=80)
+            my_project.column("project_name",anchor=CENTER, width=150)
+            my_project.column("total_expenses",anchor=CENTER,width=150)
+            my_project.column("total_incomes",anchor=CENTER,width=150)
+            my_project.column("total",anchor=CENTER,width=150)
 
             my_project.heading("#0",text="",anchor=CENTER)
             my_project.heading("project_name",text="Name",anchor=CENTER)
@@ -265,10 +262,13 @@ class HomePageView():
         def showVisualize():
             for widget in main_frame.winfo_children():
                 widget.destroy()
+
+            def getYear():
+                return year_var.get()
                 
             def exp_by_cat():     #TODO expand the window to match the plot size
                 # the figure that will contain the plot
-                bar_chart = Figure(figsize = (4, 4), dpi = 100)
+                bar_chart = Figure(figsize = (7, 4), dpi = 100)
 
                 # data
                 model = ModelMoneytor()
@@ -303,7 +303,7 @@ class HomePageView():
                 elif(model.getPreferedCurrecy() == Currency['EUR'].value):
                     pref_curr = ' (EUR)'
                 else:
-                    pref_curr = '(we are experiencing some currency issues...sorry:/)'
+                    pref_curr = '(We are experiencing some currency issues... Sorry :/)'
 
                 plot1.set_ylabel('Total of Expenses' + pref_curr)
                 
@@ -316,11 +316,11 @@ class HomePageView():
 
             def exp_by_month():     #TODO expand the window to match the plot size
                 # the figure that will contain the plot
-                bar_chart = Figure(figsize = (4, 4), dpi = 100)
+                bar_chart = Figure(figsize = (7, 4), dpi = 100)
 
                 # data
                 model = ModelMoneytor()
-                exp_by_month = model.getExpensesByMonth('2022')
+                exp_by_month = model.getExpensesByMonth(getYear())
                 months = list(exp_by_month.keys())
                 values = list(exp_by_month.values())
                 
@@ -337,14 +337,15 @@ class HomePageView():
                 plot1.set_title('Expenses by Month')
                 plot1.set_xlabel('Month')
                 
-                if(model.getPreferedCurrecy() == Currency['KRW'].value):
+                if (model.getPreferedCurrecy() == Currency['KRW'].value):
                     pref_curr = ' (KRW)'
-                elif(model.getPreferedCurrecy() == Currency['USD'].value):
+                elif (model.getPreferedCurrecy() == Currency['USD'].value):
                     pref_curr = ' (USD)'
-                elif(model.getPreferedCurrecy() == Currency['EUR'].value):
+                elif (model.getPreferedCurrecy() == Currency['EUR'].value):
                     pref_curr = ' (EUR)'
                 else:
-                    pref_curr = '(we are experiencing some currency issues...sorry:/)'
+                    pref_curr = '(We are experiencing some currency issues... Sorry :/)'
+
                 plot1.set_ylabel('Total of Expenses' + pref_curr)
                 
                 # creating the Tkinter canvas containing the Matplotlib figure
@@ -354,11 +355,22 @@ class HomePageView():
                 # placing the canvas on the Tkinter window
                 canvas.get_tk_widget().grid(column=1, row=2, sticky=tk.N, rowspan=2, padx=5, pady=5)
 
+            model = ModelMoneytor()
+
+            if (model.getPreferedCurrecy() == Currency['KRW'].value):
+                pref_curr = ' (KRW)'
+            elif (model.getPreferedCurrecy() == Currency['USD'].value):
+                pref_curr = ' (USD)'
+            elif (model.getPreferedCurrecy() == Currency['EUR'].value):
+                pref_curr = ' (EUR)'
+            else:
+                pref_curr = '(We are experiencing some currency issues... Sorry :/)'
+
             label_welcome = ttk.Label(main_frame, text='Here, you can visualize your data according different settings')
-            label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_welcome.grid(column=0, row=0, sticky=tk.NS, columnspan=2, padx=5, pady=5)
             
-            label_sorry_for_the_wait = ttk.Label(main_frame, text='This can take up to 10s because we are using real time data to transfer the finances to your preferred currency. Please be patient.')
-            label_sorry_for_the_wait.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_sorry_for_the_wait = ttk.Label(main_frame, text='This can take up to 10s because we are using real time data to transfer all of the transactions in ' + pref_curr)
+            label_sorry_for_the_wait.grid(column=0, row=1, sticky=tk.NS, columnspan=2, padx=5, pady=5)
 
             # button that displays the plot 'expenses by category'
             plot_button = ttk.Button(master=main_frame, command=exp_by_cat, text = "Expenses by category")
@@ -367,6 +379,13 @@ class HomePageView():
             # button that displays the plot 'expenses by month'
             plot_button = ttk.Button(master=main_frame, command=exp_by_month, text = "Expenses by month")
             plot_button.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
+
+            # year
+            year_var = tk.StringVar()
+            # initial year text
+            year_var.set('2022')
+            dropdown_category = tk.OptionMenu(main_frame, year_var, *model.getAllYears())  
+            dropdown_category.grid(row=4, column=0, sticky=tk.NW, pady=5, padx=15)
         
         ####################### ABOUT #######################
         def showAbout():
@@ -378,7 +397,7 @@ class HomePageView():
             label_title1 = ttk.Label(main_frame, text=about_title1)
             label_title1.grid(column=0, row=0, sticky=tk.NS, padx=10, pady=10)
                 
-            about_text1 = 'Welcome in the new product of our young startup, MONEYTOR!\n\nMONEYTOR is an application that help you manage and organize your finances.\nIt allows you to easily track your expenses and see where your money is going.\nWith MONEYTOR, you can set budgets, see your spending habits, and stay on top of your financial goals.\nWhether you are trying to save money, pay off debt, or just want to gain control of your finances, MONEYTOR is here to help.\nGive it a try and see how easy it is to take control of your money with our app.'
+            about_text1 = 'Welcome in the new product of our young startup, MONEYTOR!\n\nMONEYTOR is an application that help you manage and organize your transactions.\nIt allows you to easily track your expenses and see where your money is going.\nWith MONEYTOR, you can set budgets, see your spending habits, and stay on top of your financial goals.\nWhether you are trying to save money, pay off debt, or just want to gain control of your transactions, MONEYTOR is here to help.\nGive it a try and see how easy it is to take control of your money with our app.'
             label_about1 = ttk.Label(main_frame, text=about_text1)
             label_about1.grid(column=0, row=1, sticky=tk.W, padx=10, pady=10)
 
@@ -386,7 +405,7 @@ class HomePageView():
             label_title2 = ttk.Label(main_frame, text=about_title2)
             label_title2.grid(column=0, row=2, sticky=tk.NS, padx=10, pady=10)
             
-            about_text2 = 'Our team consists of two members who are passionate about helping people take control of their finances.\nBoth of us have experience in the finance industry and have a deep understanding of the challenges that come with managing money.\nWe created MONEYTOR because we saw a need for a simple and effective way to track expenses and stay on top of your financial goals.\nWe believe that with the right tools, anyone can master their finances and achieve their financial dreams.\nWe are excited to share our app with you and hope it helps you on your financial journey.'
+            about_text2 = 'Our team consists of two members who are passionate about helping people take control of their transactions.\nBoth of us have experience in the finance industry and have a deep understanding of the challenges that come with managing money.\nWe created MONEYTOR because we saw a need for a simple and effective way to track expenses and stay on top of your financial goals.\nWe believe that with the right tools, anyone can master their transactions and achieve their financial dreams.\nWe are excited to share our app with you and hope it helps you on your financial journey.'
             label_about2 = ttk.Label(main_frame, text=about_text2)
             label_about2.grid(column=0, row=3, sticky=tk.W, padx=10, pady=10)
 

@@ -5,14 +5,10 @@ from tkinter.messagebox import showinfo
 import time
 from PIL import Image, ImageTk
 
-import sys
-
 # setting path
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/controllers')
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
-
-# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/controllers') 
-# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+import sys
+sys.path.insert(1, './src/controllers') 
+sys.path.insert(1, './src/models')
 
 from ModelMoneytor import ModelMoneytor
 from views.HomePageView import HomePageView
@@ -290,8 +286,7 @@ class WelcomeView():
         frame_welcome = tk.Frame(root)
         
         # show the logo at the start page
-        # path_logo = 'C:/Users/charl/Desktop/moneytor/images/MoneytorLogo.png'
-        path_logo = 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/images/MoneytorLogo.png'
+        path_logo = './images/MoneytorLogo.png'
         image = Image.open(path_logo)
         photo = ImageTk.PhotoImage(image)   #convert the image type
 
