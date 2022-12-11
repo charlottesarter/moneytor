@@ -35,7 +35,11 @@ The data is stored in a .csv spreadsheet, and is managed via the interface of ou
 > Our goal is to implement a maximum of our ideas.\
 > Our first ideas for the design can be seen in the images folder.
 
-If you want to find out more about our application and how to use it we recommend the [Wiki](https://github.com/charlottesarter/moneytor/wiki).
+## How to use Moneytor?
+
+If you want to find out more about our application and how to use it, you can have a look at our [Wiki](https://github.com/charlottesarter/moneytor/wiki).
+
+You will find all of the libraries that you need to install to run our application, and some explanations about the different features of the GUI.
 
 ## What we did for the term project? 
 
