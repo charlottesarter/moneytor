@@ -11,9 +11,8 @@ if __name__ == '__main__':
 
     # Create root window of the app
     root = tk.Tk()
-    root.geometry('800x450')
+    root.geometry('900x600')
     root.title('Moneytor')
-    root.resizable(0, 0)
 
     # Show the first view : the welcome page
     WelcomeView.showWelcomeView(root)

@@ -1,4 +1,10 @@
 #amount(float),currency(enum),project(string),category(string),description(string),expense(boolean),date(yyyymmdd)
+30,1,Daily Life,Events,Gala,True,20220123
+124.9,1,Daily Life,Travelling,Hotel Annecy,True,20220217
+12000,2,South Korea,Food,Salmon Sushis,True,20220311
+180,3,Car Addiction,Others,Wheels,True,20220411
+23000,2,Daily Life,Clothing,Red skirt,True,20220511
+190.8,1,Daily Life,Travelling,Cancelation Hotel Prague,False,20220811
 3000.0,2,South Korea,Food,Gimbap,True,20220906
 7.0,3,Daily Life,Clothing,Socks,True,20221004
 3.2,1,Daily Life,Food,Spicy Pumpkin Latte,True,20221113
@@ -16,5 +22,5 @@
 1289.9,1,Daily Life,Food,Salary of November,False,20221210
 12,1,Daily Life,Food,Fruits,True,20221210
 1230,1,Daily Life,Others,Salary,False,20221211
-1000,1,Daily Life,Transport,a,True,20221211
-30,1,Car Addicion,Food,a,True,20221211
+1000,1,Daily Life,Transport,Plane,True,20221211
+30,1,Car Addiction,Food,Oil,True,20221211

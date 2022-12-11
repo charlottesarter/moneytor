@@ -109,63 +109,9 @@ class ModelMoneytor(object):
         return self.projects
 
     # Returns a dictionary : {'category':total of expenses in this category}
-
-    def getExpensesByCategory2(self):
-
-        exp_by_cat = {}
-
-        for transaction in self.transactions:
-            if transaction.category in exp_by_cat:
-                if transaction.expense == 'True':
-                    # We have to convert all the expenses in the same currency (EUR)
-                    if int(transaction.currency) == Currency['KRW'].value:
-                        exp_by_cat[transaction.category] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
-                    elif int(transaction.currency) == Currency['USD'].value:
-                        exp_by_cat[transaction.category] += float(transaction.amount) * 0.9503275 # current rate from the 7th of december
-                    elif int(transaction.currency) == Currency['EUR'].value:
-                        exp_by_cat[transaction.category] += float(transaction.amount)
-            else:
-                if transaction.expense == 'True':
-                    # We have to convert all the expenses in the same currency (EUR)
-                    if int(transaction.currency) == Currency['KRW'].value:
-                        exp_by_cat[transaction.category] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
-                    elif int(transaction.currency) == Currency['USD'].value:
-                        exp_by_cat[transaction.category] = float(transaction.amount) * 0.9503275 # current rate from the 7th of december
-                    elif int(transaction.currency) == Currency['EUR'].value:
-                        exp_by_cat[transaction.category] = float(transaction.amount)
-  
-        return exp_by_cat
-
-    def getExpensesByMonth2(self, year):
-
-        exp_by_month = {}
-
-        for transaction in self.transactions:
-            if transaction.year == year:
-                if transaction.month in exp_by_month:
-                    if transaction.expense == 'True':
-                        # We have to convert all the expenses in the same currency (EUR)
-                        if int(transaction.currency) == Currency['KRW'].value:
-                            exp_by_month[transaction.month] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
-                        elif int(transaction.currency) == Currency['USD'].value:
-                            exp_by_month[transaction.month] += float(transaction.amount) * 0.9503275 # current rate from the 7th of december
-                        elif int(transaction.currency) == Currency['EUR'].value:
-                            exp_by_month[transaction.month] += float(transaction.amount)
-                else:
-                    if transaction.year == year:
-                        if transaction.expense == 'True':
-                            # We have to convert all the expenses in the same currency (EUR)
-                            if int(transaction.currency) == Currency['KRW'].value:
-                                exp_by_month[transaction.month] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
-                            elif int(transaction.currency) == Currency['USD'].value:
-                                exp_by_month[transaction.month] = float(transaction.amount) * 0.9503275 # current rate from the 7th of december
-                            elif int(transaction.currency) == Currency['EUR'].value:
-                                exp_by_month[transaction.month] = float(transaction.amount)
-  
-        return exp_by_month
     
     def getExpensesByMonth(self, year):
-        #get preferred currency
+        # Get preferred currency
         if(self.getPreferedCurrecy() == Currency['KRW'].value):
             to_currency = 'KRW'
         elif(self.getPreferedCurrecy() == Currency['USD'].value):
@@ -206,7 +152,7 @@ class ModelMoneytor(object):
         return exp_by_month
     
     def getExpensesByCategory(self):
-        #get preferred currency
+        # Get preferred currency
         if(self.getPreferedCurrecy() == Currency['KRW'].value):
             to_currency = 'KRW'
         elif(self.getPreferedCurrecy() == Currency['USD'].value):
@@ -277,5 +223,19 @@ class ModelMoneytor(object):
         fd = open('data/transactions.csv', 'a')
         fd.write(line)
         fd.close() 
+
+    # Returns all the years of the transactions
+
+    def getAllYears(self):
+
+        years = []
+
+        for transaction in self.transactions:
+            
+            if transaction.year not in years:
+                years.append(transaction.year)
+        
+        return years
+
 
 moneytor = ModelMoneytor()
