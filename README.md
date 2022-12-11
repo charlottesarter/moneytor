@@ -4,8 +4,6 @@
 
 > Moneytor = 'Money' + 'to monitor'
 
-#TODO: delete the skip function on the welcome screen
-
 Moneytor is an open source software designed to help people manage their finances. The user can put in all of his/her expenses and incomes and sort them based on different parameters.
 Moneytor provides multiple ways to visualize the finances. The user can play with different filters to better analyze his/her finances.
 
@@ -34,16 +32,34 @@ The data is stored in a .csv spreadsheet, and is managed via the interface of ou
 > Our goal is to implement a maximum of our ideas.\
 > Our first ideas for the design can be seen in the images folder.
 
-## Interim Report for the Term Project 
+## What we did for the term project? 
 
-We managed to implement most of the features we wanted to have for our Application. And a little bit more.
-Due to the lack of time, unfortunately, we have not managed to edit or delete entries. Also, as of now, there is only one .csv file in which all the finances are stored. This means that logging in using an account so far only changes the preferred currency but not the displayed data. Due to time constraints, we have decided to leave it at that, as we are mainly focuesed on demonstrating the functions of our program.
-Speaking of which, as a bonus, we have managed to transfer the currency of the saved entries to the user's preferred currency. In doing so, we use live data. At the moment, unfortunately, this takes a lot of time, so we implemented this feature only for the plots, but not for the project list. We have some ideas how to change this problem in the future, but unfortunately we didn't have the time to do so until the submission.
-For the future we would also like to provide more plots for data visualization/analysis as well as implement more filters.
+We managed to implement **most of the features** that we wanted to have for our application, and a little bit more :)
+
+#### What we did not manage to do
+
+- Update or delete existing data: for now, you can only add a transaction
+- One transaction file per user: it took really long to create a transaction file with sample data, so we did only one transaction file that we are using for all of the users
+> If you log in as a different user, it will only change the preferred currency but not the displayed data. Due to time constraints, we have decided to leave it at that, as we are mainly focuesed on **demonstrating the features** of our program.
+
+> Our only issue was a **lack of time** ⌛
+
+#### What we did as a bonus
+
+- We use live data to convert all of the transactions in the prefered currency of the logged user
+
+> As it is taking a lot of time to convert all of the data, we, implemented this feature only for the plots, but not for the project list (we convert the data with fixed exchange rates).
+
+## Ideas of improvement
+
+- Provide more plots for data visualization and analysis
+  - For example a line chart that displays all of the expenses by month for all of the years in one plot to compare them
+- Provide more filters to display more precise and customized plots
+- better verify the user's input (that is easy to do but just takes time)
 
 ## Authors 
 
 - Max Eberlein
 - Charlotte Sarter
 
-As Team "Lemon Soju" :)
+As Team "🍋 Lemon Soju" :)

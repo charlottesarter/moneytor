@@ -311,8 +311,8 @@ class WelcomeView():
         
         
         ############# ONLY FOR TESTING #####################
-        button_skip = ttk.Button(frame_welcome, text='Skip', command=skipForTesting)
-        button_skip.grid(column=0, row=10, sticky=tk.N, padx=10, pady=10)
+        # button_skip = ttk.Button(frame_welcome, text='Skip', command=skipForTesting)
+        # button_skip.grid(column=0, row=10, sticky=tk.N, padx=10, pady=10)
         
         frame_welcome.pack()
 
