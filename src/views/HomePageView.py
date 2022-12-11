@@ -7,9 +7,9 @@ from tkinter import *
 
 import sys
 
-# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
 
-sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
+# sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
 
 from ModelMoneytor import ModelMoneytor
 from Transaction import Transaction

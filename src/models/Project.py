@@ -18,23 +18,23 @@ class Project:
         # 2nd info : the total of expenses
         total_expenses = 0
         for transaction in self.transactions:
-            if transaction.expense:
+            if transaction.expense == 'True':
                 total_expenses += float(transaction.amount)
 
-        key_info.append(total_expenses)
+        key_info.append(round(total_expenses, 2))
 
         # 3rd info : the total of incomes
         total_incomes = 0
         for transaction in self.transactions:
-            if not transaction.expense:
+            if transaction.expense == 'False':
                 total_incomes += float(transaction.amount)
 
-        key_info.append(total_incomes)
+        key_info.append(round(total_incomes, 2))
 
         # 4th info : the sold of the project
         sold = total_incomes - total_expenses
 
-        key_info.append(sold)
+        key_info.append(round(sold, 2))
 
         return key_info
 

@@ -56,7 +56,13 @@ class ModelMoneytor(object):
             
         # Save the current user who is logged in the app
         fd = open('data/user_logged.txt', 'r')
-        self.user_logged = fd.read()
+        line = fd.read()
+        user_info = line.split(',')
+
+        self.user_logged = user_info[0]
+        self.password_logged = user_info[1]
+        self.prefered_currency = user_info[2]
+
         fd.close()
 
     # Make sure that there is only one model (singleton)
@@ -110,7 +116,7 @@ class ModelMoneytor(object):
 
         for transaction in self.transactions:
             if transaction.category in exp_by_cat:
-                if transaction.expense:
+                if transaction.expense == 'True':
                     # We have to convert all the expenses in the same currency (EUR)
                     if int(transaction.currency) == Currency['KRW'].value:
                         exp_by_cat[transaction.category] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -119,7 +125,7 @@ class ModelMoneytor(object):
                     elif int(transaction.currency) == Currency['EUR'].value:
                         exp_by_cat[transaction.category] += float(transaction.amount)
             else:
-                if transaction.expense:
+                if transaction.expense == 'True':
                     # We have to convert all the expenses in the same currency (EUR)
                     if int(transaction.currency) == Currency['KRW'].value:
                         exp_by_cat[transaction.category] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -151,7 +157,7 @@ class ModelMoneytor(object):
         for transaction in self.transactions:
             if transaction.year == year:
                 if transaction.month in exp_by_month:
-                    if transaction.expense:
+                    if transaction.expense == 'True':
                         # We have to convert all the expenses in the same currency (EUR)
                         if int(transaction.currency) == Currency['KRW'].value:
                             exp_by_month[transaction.month] += float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -161,7 +167,7 @@ class ModelMoneytor(object):
                             exp_by_month[transaction.month] += float(transaction.amount)
                 else:
                     if transaction.year == year:
-                        if transaction.expense:
+                        if transaction.expense == 'True':
                             # We have to convert all the expenses in the same currency (EUR)
                             if int(transaction.currency) == Currency['KRW'].value:
                                 exp_by_month[transaction.month] = float(transaction.amount) * 0.000722 # current rate from the 7th of december
@@ -174,19 +180,28 @@ class ModelMoneytor(object):
 
     # Update the username of the logged user
 
-    def setUserLogged(self, username):
+    def setUserLogged(self, username, password, currency):
         fd = open('data/user_logged.txt', 'r+')
 
         # Delete the name of the previous logged user
         fd.truncate(0)
 
         # Write the name of the new user logged
-        fd.write(username)
+        fd.write(username + ',' + password + ',' + currency)
 
         fd.close()
 
+    # Returns the current user using the app
+
     def getUserLogged(self):
         return str(self.user_logged)
+
+    # Returns the prefered currency of the current user
+
+    def getPreferedCurrecy(self):
+        return int(self.prefered_currency)
+
+    # Add a transaction in the file transaction.csv (and in the model)
 
     def addTransaction(self, line):
 
@@ -194,7 +209,5 @@ class ModelMoneytor(object):
         fd = open('data/transactions.csv', 'a')
         fd.write(line)
         fd.close() 
-
-moneytor = ModelMoneytor()
 
 moneytor = ModelMoneytor()
