@@ -1,3 +1,6 @@
+from forex_python.converter import CurrencyRates
+from models.ModelMoneytor import ModelMoneytor
+
 class Project:
 
     def __init__(self, name):
@@ -14,12 +17,15 @@ class Project:
 
         # 1st info : the name of the project
         key_info.append(self.name)
+        
+        cr = CurrencyRates()
+        model = ModelMoneytor()
 
         # 2nd info : the total of expenses
         total_expenses = 0
         for transaction in self.transactions:
             if transaction.expense == 'True':
-                total_expenses += float(transaction.amount)
+                total_expenses += cr.convert(transaction.currency, model.getPreferedCurrecy, float(transaction.amount))
 
         key_info.append(round(total_expenses, 2))
 
@@ -27,7 +33,7 @@ class Project:
         total_incomes = 0
         for transaction in self.transactions:
             if transaction.expense == 'False':
-                total_incomes += float(transaction.amount)
+                total_incomes += cr.convert(transaction.currency, model.getPreferedCurrecy, float(transaction.amount))
 
         key_info.append(round(total_incomes, 2))
 
