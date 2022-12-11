@@ -7,12 +7,13 @@ from tkinter import *
 
 import sys
 
-sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
+# sys.path.insert(1, 'C:/Users/charl/Desktop/moneytor/src/models')
 
-# sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
+sys.path.insert(1, 'C:/Users/Max Eberlein/OneDrive/Documents/Studium/5. Semester/Open Source Software/Term project/moneytor/moneytor/src/models')
 
 from ModelMoneytor import ModelMoneytor
 from Transaction import Transaction
+from models.Currency import Currency
 
 class HomePageView():
     
@@ -215,9 +216,23 @@ class HomePageView():
 
             for widget in main_frame.winfo_children():
                 widget.destroy()
+                
+            model = ModelMoneytor()
+            
+            if(model.getPreferedCurrecy() == Currency['KRW'].value):
+                pref_curr = ' (KRW)'
+            elif(model.getPreferedCurrecy() == Currency['USD'].value):
+                pref_curr = ' (USD)'
+            elif(model.getPreferedCurrecy() == Currency['EUR'].value):
+                pref_curr = ' (EUR)'
+            else:
+                pref_curr = '(we are experiencing some currency issues...sorry:/)'
 
             label_welcome = ttk.Label(main_frame, text='Here is the key information of all of your projects')
             label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            
+            label_curr = ttk.Label(main_frame, text='all finances are displayed in ' + pref_curr)
+            label_curr.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
             
             my_project = ttk.Treeview(main_frame)
 
@@ -237,8 +252,6 @@ class HomePageView():
 
             # Get all the project and their key information
 
-            model = ModelMoneytor()
-
             projects_info = []
             for project in model.getAllProjects():
                 projects_info.append(project.getKeyInfo())
@@ -246,7 +259,7 @@ class HomePageView():
             for i in range(len(projects_info)):
                 my_project.insert(parent='',index='end',iid=i,text='', values=projects_info[i])
 
-            my_project.grid(column=0, row=1, sticky=tk.N, padx=5, pady=5)
+            my_project.grid(column=0, row=2, sticky=tk.N, padx=5, pady=5)
 
         ####################### VISUALIZE #######################
         def showVisualize():
@@ -282,14 +295,24 @@ class HomePageView():
                 # adding labels for the axes and a title
                 plot1.set_title('Expenses by Category')
                 plot1.set_xlabel('Category')
-                plot1.set_ylabel('Total of Expenses (€)')
+                
+                if(model.getPreferedCurrecy() == Currency['KRW'].value):
+                    pref_curr = ' (KRW)'
+                elif(model.getPreferedCurrecy() == Currency['USD'].value):
+                    pref_curr = ' (USD)'
+                elif(model.getPreferedCurrecy() == Currency['EUR'].value):
+                    pref_curr = ' (EUR)'
+                else:
+                    pref_curr = '(we are experiencing some currency issues...sorry:/)'
+
+                plot1.set_ylabel('Total of Expenses' + pref_curr)
                 
                 # creating the Tkinter canvas containing the Matplotlib figure
                 canvas = FigureCanvasTkAgg(bar_chart, master = main_frame)
                 canvas.draw()
                 
                 # placing the canvas on the Tkinter window
-                canvas.get_tk_widget().grid(column=1, row=1, sticky=tk.N, rowspan=2, padx=5, pady=5)
+                canvas.get_tk_widget().grid(column=1, row=2, sticky=tk.N, rowspan=2, padx=5, pady=5)
 
             def exp_by_month():     #TODO expand the window to match the plot size
                 # the figure that will contain the plot
@@ -313,25 +336,37 @@ class HomePageView():
                 # adding labels for the axes and a title
                 plot1.set_title('Expenses by Month')
                 plot1.set_xlabel('Month')
-                plot1.set_ylabel('Total of Expenses (€)')
+                
+                if(model.getPreferedCurrecy() == Currency['KRW'].value):
+                    pref_curr = ' (KRW)'
+                elif(model.getPreferedCurrecy() == Currency['USD'].value):
+                    pref_curr = ' (USD)'
+                elif(model.getPreferedCurrecy() == Currency['EUR'].value):
+                    pref_curr = ' (EUR)'
+                else:
+                    pref_curr = '(we are experiencing some currency issues...sorry:/)'
+                plot1.set_ylabel('Total of Expenses' + pref_curr)
                 
                 # creating the Tkinter canvas containing the Matplotlib figure
                 canvas = FigureCanvasTkAgg(bar_chart, master = main_frame)
                 canvas.draw()
                 
                 # placing the canvas on the Tkinter window
-                canvas.get_tk_widget().grid(column=1, row=1, sticky=tk.N, rowspan=2, padx=5, pady=5)
+                canvas.get_tk_widget().grid(column=1, row=2, sticky=tk.N, rowspan=2, padx=5, pady=5)
 
             label_welcome = ttk.Label(main_frame, text='Here, you can visualize your data according different settings')
             label_welcome.grid(column=0, row=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            
+            label_sorry_for_the_wait = ttk.Label(main_frame, text='This can take up to 10s because we are using real time data to transfer the finances to your preferred currency. Please be patient.')
+            label_sorry_for_the_wait.grid(column=0, row=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
 
             # button that displays the plot 'expenses by category'
             plot_button = ttk.Button(master=main_frame, command=exp_by_cat, text = "Expenses by category")
-            plot_button.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+            plot_button.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
 
             # button that displays the plot 'expenses by month'
             plot_button = ttk.Button(master=main_frame, command=exp_by_month, text = "Expenses by month")
-            plot_button.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+            plot_button.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
         
         ####################### ABOUT #######################
         def showAbout():

@@ -110,7 +110,7 @@ class ModelMoneytor(object):
 
     # Returns a dictionary : {'category':total of expenses in this category}
 
-    def getExpensesByCategory(self):
+    def getExpensesByCategory2(self):
 
         exp_by_cat = {}
 
@@ -135,22 +135,8 @@ class ModelMoneytor(object):
                         exp_by_cat[transaction.category] = float(transaction.amount)
   
         return exp_by_cat
-    
-    def getExpensesByCategory2(self):
-        #get preferred currency
-        if(self.user_logged.preferred_currency == Currency['KRW'].value):               #I don't know how to get the preferred currency here
-            to_currency = 'KRW'
-        elif(self.user_logged.preferred_currency == Currency['USD'].value):
-            to_currency = 'USD'
-        elif(self.user_logged.preferred_currency == Currency['EUR'].value):
-            to_currency = 'EUR'
-        else:
-            print('preferred currency not found')
-          
-        cr = CurrencyRates()
-        exp_by_cat = {}
 
-    def getExpensesByMonth(self, year):
+    def getExpensesByMonth2(self, year):
 
         exp_by_month = {}
 
@@ -177,6 +163,88 @@ class ModelMoneytor(object):
                                 exp_by_month[transaction.month] = float(transaction.amount)
   
         return exp_by_month
+    
+    def getExpensesByMonth(self, year):
+        #get preferred currency
+        if(self.getPreferedCurrecy() == Currency['KRW'].value):
+            to_currency = 'KRW'
+        elif(self.getPreferedCurrecy() == Currency['USD'].value):
+            to_currency = 'USD'
+        elif(self.getPreferedCurrecy() == Currency['EUR'].value):
+            to_currency = 'EUR'
+        else:
+            print('preferred currency not found')
+          
+        cr = CurrencyRates()
+        exp_by_month = {}
+
+        for transaction in self.transactions:
+            if transaction.year == year:
+                if transaction.month in exp_by_month:
+                    if transaction.expense == 'True':
+                        # We have to convert all the expenses in the same currency (EUR)
+                        if int(transaction.currency) == Currency['KRW'].value:
+                            from_currency = 'KRW'
+                        elif int(transaction.currency) == Currency['USD'].value:
+                            from_currency = 'USD'
+                        elif int(transaction.currency) == Currency['EUR'].value:
+                            from_currency = 'EUR'
+                        # transfer the saved amount to the preferred currency
+                        exp_by_month[transaction.month] += cr.convert(from_currency, to_currency, float(transaction.amount))
+                else:
+                    if transaction.year == year:
+                        if transaction.expense == 'True':
+                            # We have to convert all the expenses in the same currency (EUR)
+                            if int(transaction.currency) == Currency['KRW'].value:
+                                from_currency = 'KRW'
+                            elif int(transaction.currency) == Currency['USD'].value:
+                                from_currency = 'USD'
+                            elif int(transaction.currency) == Currency['EUR'].value:
+                                from_currency = 'EUR'
+                            exp_by_month[transaction.month] = cr.convert(from_currency, to_currency, float(transaction.amount))
+  
+        return exp_by_month
+    
+    def getExpensesByCategory(self):
+        #get preferred currency
+        if(self.getPreferedCurrecy() == Currency['KRW'].value):
+            to_currency = 'KRW'
+        elif(self.getPreferedCurrecy() == Currency['USD'].value):
+            to_currency = 'USD'
+        elif(self.getPreferedCurrecy() == Currency['EUR'].value):
+            to_currency = 'EUR'
+        else:
+            print('preferred currency not found')
+          
+        cr = CurrencyRates()
+        exp_by_cat = {}
+        
+        for transaction in self.transactions:
+            if transaction.category in exp_by_cat:
+                if transaction.expense == 'True':
+                    # We have to convert all the expenses in the same currency (EUR)
+                    if int(transaction.currency) == Currency['KRW'].value:
+                        from_currency = 'KRW'
+                    elif int(transaction.currency) == Currency['USD'].value:
+                        from_currency = 'USD'
+                    elif int(transaction.currency) == Currency['EUR'].value:
+                        from_currency = 'EUR'
+                    
+                    #convert the saved currency from the file to the preferred currency using live data
+                    exp_by_cat[transaction.category] += cr.convert(from_currency, to_currency, float(transaction.amount))
+            else:
+                if transaction.expense == 'True':
+                    # We have to convert all the expenses in the same currency (EUR)
+                    if int(transaction.currency) == Currency['KRW'].value:
+                        from_currency = 'KRW'
+                    elif int(transaction.currency) == Currency['USD'].value:
+                        from_currency = 'USD'
+                    elif int(transaction.currency) == Currency['EUR'].value:
+                        from_currency = 'EUR'
+                    
+                    exp_by_cat[transaction.category] = cr.convert(from_currency, to_currency, float(transaction.amount))
+  
+        return exp_by_cat
 
     # Update the username of the logged user
 
