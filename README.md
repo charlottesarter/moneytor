@@ -9,6 +9,7 @@
 #TODO: add the about page
 #TODO: look what the kriterien of the prof are
 #TODO: readme überarbeiten
+#TODO. achsenbeschreiftung der plots--> nicht eur sondern pref_curr
 
 Moneytor is an open source software designed to help people manage their finances. The user can put in all of his/her expenses and incomes and sort them based on different parameters.
 Moneytor provides multiple ways to visualize the finances. The user can play with different filters to better analyze his/her finances.
