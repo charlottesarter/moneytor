@@ -38,7 +38,7 @@ The data is stored in a .csv spreadsheet, and is managed via the interface of ou
 
 We managed to implement **most of the features** that we wanted to have for our application, and a little bit more :)
 
-### What we did not manage to do
+#### What we did not manage to do
 
 - Update or delete existing data: for now, you can only add a transaction
 - One transaction file per user: it was really long to create a transaction file with sample data, so we did only one transaction file that we are using for all of the users
@@ -46,7 +46,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 
 > Our only issue was a **lack of time** ⌛
 
-### What we did as a bonus
+#### What we did as a bonus
 
 - We use live data to convert all of the transactions in the prefered currency of the logged user
 
