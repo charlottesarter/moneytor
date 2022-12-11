@@ -13,6 +13,7 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.geometry('800x450')
     root.title('Moneytor')
+    root.resizable(0, 0)
 
     # Show the first view : the welcome page
     WelcomeView.showWelcomeView(root)
