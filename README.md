@@ -66,6 +66,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 - don't use the name to distinguish between two people
 - chose which currency you want to look at for the plots
 - add more currencies
+- add another menu cascade to show all expenses seperately
 
 ## Authors 
 
