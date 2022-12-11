@@ -1,7 +1,6 @@
+# Moneytor (💸 + 👀)
 
 ![Moneytor Logo](/images/MoneytorLogo.png)
-
-# Moneytor (💸 + 👀)
 
 ## What is the concept of Moneytor?
 
