@@ -417,9 +417,9 @@ class HomePageView():
             label_impressum = ttk.Label(main_frame, text=impressum_text)
             label_impressum.grid(column=0, row=5, sticky=tk.W, padx=10, pady=10)
             
-            # disclaimer_text = 'The text for this "About" page was generated only using the open AI ChatGPT.\nmore Information: https://chat.openai.com/chat'
-            # label_diclaimer = ttk.Label(main_frame, text=disclaimer_text, font=("Arial", 12))
-            # label_diclaimer.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
+            disclaimer_text = 'The text for this "About" page was generated only using the open AI ChatGPT.\nmore Information: https://chat.openai.com/chat'
+            label_diclaimer = ttk.Label(main_frame, text=disclaimer_text, foreground='blue')
+            label_diclaimer.grid(column=0, row=10, sticky=tk.W, padx=5, pady=5)
 
         ####################### MAIN #######################
 
