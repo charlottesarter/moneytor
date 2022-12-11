@@ -53,6 +53,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 ## Ideas of improvement
 
 - Provide more plots for data visualization and analysis
+  - For example a line chart that displays all of the expenses by month for all of the years 
 - Provide more filters to display more precise and customized plots
 
 ## Authors 
