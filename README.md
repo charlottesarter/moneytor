@@ -1,5 +1,7 @@
 # Moneytor (💸 + 👀)
 
+![Moneytor Logo](/assets/images/tux.png)
+
 ## What is the concept of Moneytor?
 
 > Moneytor = 'Money' + 'to monitor'
