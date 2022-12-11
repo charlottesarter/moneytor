@@ -2,7 +2,7 @@
 
 ![Moneytor Logo](/images/MoneytorLogo.png)
 
-## What is the concept of Moneytor?
+## What is the concept of Moneytor? 💭
 
 > Moneytor = 'Money' + 'to monitor'
 
@@ -11,7 +11,7 @@ Moneytor provides multiple ways to visualize the finances. The user can play wit
 
 The data is stored in a .csv spreadsheet, and is managed via the interface of our desktop application.
 
-## What are the different features?
+## What are the different features? 💫
 
 - First, let's set up the application:
   - Enter your **name**
@@ -52,7 +52,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 
 > Our only issue was a **lack of time** ⌛
 
-#### What we did as a bonus
+#### What we did as a bonus 🎁
 
 - We use live data to convert all of the transactions in the prefered currency of the logged user
 
@@ -71,7 +71,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 - Display all of the transactions in one page so the user can look at them and update / delete them
 - Allow the user to choose the date at which the transaction is done
 
-## Authors 
+## Authors ✍️
 
 - Max Eberlein
 - Charlotte Sarter
