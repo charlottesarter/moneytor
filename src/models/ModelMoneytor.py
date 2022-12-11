@@ -160,7 +160,7 @@ class ModelMoneytor(object):
         elif(self.getPreferedCurrecy() == Currency['EUR'].value):
             to_currency = 'EUR'
         else:
-            print('preferred currency not found')
+            print('Preferred currency not found')
           
         cr = CurrencyRates()
         exp_by_cat = {}
