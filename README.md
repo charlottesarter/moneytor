@@ -62,4 +62,4 @@ We managed to implement **most of the features** that we wanted to have for our 
 - Max Eberlein
 - Charlotte Sarter
 
-As Team "Lemon Soju 🍋" :)
+As Team "🍋 Lemon Soju" :)
