@@ -55,6 +55,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 - Provide more plots for data visualization and analysis
   - For example a line chart that displays all of the expenses by month for all of the years in one plot to compare them
 - Provide more filters to display more precise and customized plots
+- better verify the user's input (that is easy to do but just takes time)
 
 ## Authors 
 
