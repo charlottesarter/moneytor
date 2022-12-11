@@ -169,10 +169,10 @@ class HomePageView():
             # initial menu text
             category_var.set('Food')
             dropdown_category = tk.OptionMenu(main_frame, category_var, *model.getAllCategories())  
-            dropdown_category.grid(row=4, column=0, sticky=tk.NW, pady=5, padx=20)
+            dropdown_category.grid(row=4, column=0, sticky=tk.NW, pady=5, padx=15)
             
             add_category_button = ttk.Button(main_frame, text='New category', command=addCategory) 
-            add_category_button.grid(row=4, column=0, sticky=tk.NE, pady=5, padx=20)
+            add_category_button.grid(row=4, column=0, sticky=tk.NE, pady=5, padx=15)
 
             # description
             label_description = ttk.Label(main_frame, text='Description')
@@ -208,7 +208,7 @@ class HomePageView():
 
             # income button
             income_button = ttk.Button(main_frame, text='Income', command=addIncome) 
-            income_button.grid(column=0, row=9, sticky=tk.S, columnspan=2, padx=5, pady=1)
+            income_button.grid(column=0, row=9, sticky=tk.N, columnspan=2, padx=5)
 
         ####################### PROJECTS #######################
         def showProjects():
@@ -233,7 +233,7 @@ class HomePageView():
             my_project.heading("project_name",text="Name",anchor=CENTER)
             my_project.heading("total_expenses",text="Expenses",anchor=CENTER)
             my_project.heading("total_incomes",text="Incomes",anchor=CENTER)
-            my_project.heading("total",text="total",anchor=CENTER)
+            my_project.heading("total",text="Sold",anchor=CENTER)
 
             # Get all the project and their key information
 
@@ -338,22 +338,34 @@ class HomePageView():
 
             for widget in main_frame.winfo_children():
                 widget.destroy()
+
+            about_title1 = 'ABOUT MONEYTOR\n'
+            label_title1 = ttk.Label(main_frame, text=about_title1)
+            label_title1.grid(column=0, row=0, sticky=tk.NS, padx=10, pady=10)
                 
-            about_text1 = 'Welcome to our young startup! We created an application to help you manage and organize your finances.\nOur app, Moneytor, allows you to easily track your expenses and see where your money is going. \nWith Moneytor, you can set budgets, see your spending habits, and stay on top of your financial goals. \nWhether you are trying to save money, pay off debt, or just want to gain control of your finances, Moneytor is here to help. \nGive it a try and see how easy it is to take control of your money with our app.'
+            about_text1 = 'Welcome in the new product of our young startup, MONEYTOR!\n\nMONEYTOR is an application that help you manage and organize your finances.\nIt allows you to easily track your expenses and see where your money is going.\nWith MONEYTOR, you can set budgets, see your spending habits, and stay on top of your financial goals.\nWhether you are trying to save money, pay off debt, or just want to gain control of your finances, MONEYTOR is here to help.\nGive it a try and see how easy it is to take control of your money with our app.'
             label_about1 = ttk.Label(main_frame, text=about_text1)
-            label_about1.grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)
+            label_about1.grid(column=0, row=1, sticky=tk.W, padx=10, pady=10)
+
+            about_title2 = '\nOUR TEAM\n'
+            label_title2 = ttk.Label(main_frame, text=about_title2)
+            label_title2.grid(column=0, row=2, sticky=tk.NS, padx=10, pady=10)
             
-            about_text2 = 'Our team consists of two members who are passionate about helping people take control of their finances. \nBoth of us have experience in the finance industry and have a deep understanding of the challenges that come with managing money. \nWe created Moneytor because we saw a need for a simple and effective way to track expenses and stay on top of your financial goals. \nWe believe that with the right tools, anyone can master their finances and achieve their financial dreams. \nWe are excited to share our app with you and hope it helps you on your financial journey.'
+            about_text2 = 'Our team consists of two members who are passionate about helping people take control of their finances.\nBoth of us have experience in the finance industry and have a deep understanding of the challenges that come with managing money.\nWe created MONEYTOR because we saw a need for a simple and effective way to track expenses and stay on top of your financial goals.\nWe believe that with the right tools, anyone can master their finances and achieve their financial dreams.\nWe are excited to share our app with you and hope it helps you on your financial journey.'
             label_about2 = ttk.Label(main_frame, text=about_text2)
-            label_about2.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+            label_about2.grid(column=0, row=3, sticky=tk.W, padx=10, pady=10)
+
+            info_title = '\nINFORMATION\n'
+            label_info_title = ttk.Label(main_frame, text=info_title)
+            label_info_title.grid(column=0, row=4, sticky=tk.NS, padx=10, pady=10)
             
-            impressum_text = 'Impressum: \nMoneytor is a fictional company created for the purpose of this exercise.\nHeadquarters: London, UK\nContact: info@moneytor.com\nManaging Directors: Charlotte Sarter and Max Eberlein\nRegistration number: 31415926\nVAT number: 27182818\nDisclaimer: Moneytor is not a real company and does not offer any products or services. The information provided in this impressum is for illustrative purposes only.'
+            impressum_text = 'Impressum: MONEYTOR is a fictional company created for the purpose of this exercise.\nHeadquarters: London, UK\nContact: info@moneytor.com\nFounders: Charlotte Sarter & Max Eberlein\nRegistration number: 31415926\nVAT number: 27182818\nDisclaimer: MONEYTOR is not a real company and does not offer any products or services.\nThe information provided in this impressum is for illustrative purposes only.'
             label_impressum = ttk.Label(main_frame, text=impressum_text)
-            label_impressum.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+            label_impressum.grid(column=0, row=5, sticky=tk.W, padx=10, pady=10)
             
-            disclaimer_text = 'The text for this "About" page was generated only using the open AI ChatGPT.\nmore Information: https://chat.openai.com/chat'
-            label_diclaimer = ttk.Label(main_frame, text=disclaimer_text, font=("Arial", 12))
-            label_diclaimer.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
+            # disclaimer_text = 'The text for this "About" page was generated only using the open AI ChatGPT.\nmore Information: https://chat.openai.com/chat'
+            # label_diclaimer = ttk.Label(main_frame, text=disclaimer_text, font=("Arial", 12))
+            # label_diclaimer.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
 
         ####################### MAIN #######################
 
