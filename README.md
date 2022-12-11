@@ -4,10 +4,7 @@
 
 > Moneytor = 'Money' + 'to monitor'
 
-#TODO: add all the necceasary extensions like matplot etc. and (python3 -m pip install pillow) (pip install forex-python)
 #TODO: delete the skip function on the welcome screen
-#TODO: add the about page
-#TODO: look what the kriterien of the prof are
 #TODO: readme überarbeiten
 #TODO. achsenbeschreiftung der plots--> nicht eur sondern pref_curr
 #TODO: trasfer the currency to pref_curr in the visualize list
