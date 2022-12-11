@@ -121,17 +121,21 @@ class HomePageView():
                 label_add_sucess.after(4000, label_add_sucess.destroy)
                 
             def addCategory():
+
                 popup = tk.Tk()
                 popup.withdraw()
+
                 # the input dialog
-                USER_INP = tk.simpledialog.askstring(title="add Category", prompt="Which Category would you like to add?")
+                USER_INP = tk.simpledialog.askstring(title="New Category", prompt="Which Category would you like to create?")
                 if(USER_INP):   # to make sure a new one was added
                     category_var.set(USER_INP)
                 
             def addProject():
+
                 popup = tk.Tk()
                 popup.withdraw()
-                USER_INP = tk.simpledialog.askstring(title="add Project", prompt="Which Project would you like to add?")
+
+                USER_INP = tk.simpledialog.askstring(title="New Project", prompt="Which Project would you like to create?")
                 if(USER_INP):
                     project_var.set(USER_INP)
 
@@ -141,7 +145,7 @@ class HomePageView():
             model = ModelMoneytor()
             
             label_homepage = tk.Label(main_frame, text='What\'s new today ' + model.getUserLogged() + ' ?')
-            label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=4, padx=5, pady=5)
+            label_homepage.grid(column=0, row=0, sticky=tk.EW, columnspan=2, padx=5, pady=5)
 
             # create widgets
             # project
@@ -151,60 +155,60 @@ class HomePageView():
             project_var = tk.StringVar()
             # initial menu text
             project_var.set('Daily Life')
-            dropdown_project = tk.OptionMenu(main_frame, project_var , *model.getAllProjectsName())  #TODO let the user create a new projects
-            dropdown_project.grid(row=2, column=0, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            dropdown_project = tk.OptionMenu(main_frame, project_var , *model.getAllProjectsName()) 
+            dropdown_project.grid(row=2, column=0, sticky=tk.E, padx=2, pady=5)
             
-            add_project_button = ttk.Button(main_frame, text='add Project', command=addProject) 
-            add_project_button.grid(row=3, column=0, sticky=tk.NW, columnspan=4, padx=5, pady=30)
+            add_project_button = ttk.Button(main_frame, text='New project', command=addProject) 
+            add_project_button.grid(row=2, column=1, sticky=tk.W, padx=2, pady=5)
 
             # category
             label_category = ttk.Label(main_frame, text='Category')
-            label_category.grid(row=1, column=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            label_category.grid(row=3, column=0, sticky=tk.N, padx=5, pady=5)
                 
             category_var = tk.StringVar()
             # initial menu text
             category_var.set('Food')
-            dropdown_category = tk.OptionMenu(main_frame, category_var, *model.getAllCategories())  #TODO let the user create a new category
-            dropdown_category.grid(row=2, column=1, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            dropdown_category = tk.OptionMenu(main_frame, category_var, *model.getAllCategories())  
+            dropdown_category.grid(row=4, column=0, sticky=tk.NW, pady=5, padx=20)
             
-            add_category_button = ttk.Button(main_frame, text='add Category', command=addCategory) 
-            add_category_button.grid(row=3, column=1, sticky=tk.NE, columnspan=4, padx=5, pady=30)
+            add_category_button = ttk.Button(main_frame, text='New category', command=addCategory) 
+            add_category_button.grid(row=4, column=0, sticky=tk.NE, pady=5, padx=20)
 
             # description
             label_description = ttk.Label(main_frame, text='Description')
-            label_description.grid(column=0, row=4, sticky=tk.N, padx=5, pady=5)
+            label_description.grid(column=1, row=3, sticky=tk.N, padx=5, pady=5)
 
-            # category entry
+            # description entry
             description_var = tk.StringVar()
             description_entry = ttk.Entry(main_frame, textvariable=description_var, width=30)
-            description_entry.grid(column=0, row=5, sticky=tk.E, padx=5, pady=5)
+            description_entry.grid(column=1, row=4, sticky=tk.E, padx=5, pady=5)
 
             # amount
             label_amount = ttk.Label(main_frame, text='Amount')
-            label_amount.grid(column=1, row=4, sticky=tk.N, padx=5, pady=5)
+            label_amount.grid(column=0, row=5, sticky=tk.N, padx=5, pady=5)
 
             # amount entry
             amount_var = tk.IntVar()
             amount_entry = ttk.Spinbox(main_frame, from_=0, to=float('+inf'), textvariable=amount_var, width=30)
-            amount_entry.grid(column=1, row=5, sticky=tk.E, padx=5, pady=5)
+            amount_entry.grid(column=0, row=6, sticky=tk.E, padx=5, pady=5)
 
             # currency
             label_currency = ttk.Label(main_frame, text='Currency')
-            label_currency.grid(column=3, row=4, sticky=tk.N, padx=5, pady=5)
+            label_currency.grid(column=1, row=5, sticky=tk.N, padx=5, pady=5)
 
             # currency entry
             currency_var = tk.StringVar()
             currency_var.set('EUR')
-            dropdown_currency = tk.OptionMenu(main_frame, currency_var, *['EUR', 'KRW', 'USD'])  #TODO let the user create a new projects
-            dropdown_currency.grid(column=2, row=5, sticky=tk.N, columnspan=2, padx=5, pady=5)
+            dropdown_currency = tk.OptionMenu(main_frame, currency_var, *['EUR', 'KRW', 'USD']) 
+            dropdown_currency.grid(column=1, row=6, sticky=tk.N, padx=5, pady=5)
 
             # expense button
-            expense_button = ttk.Button(main_frame, text='Expense', command=addExpense) # TODO : define the command of the button 
-            expense_button.grid(column=0, row=7, sticky=tk.S, columnspan=4, padx=5, pady=30)
+            expense_button = ttk.Button(main_frame, text='Expense', command=addExpense)  
+            expense_button.grid(column=0, row=8, sticky=tk.S, columnspan=2, padx=5, pady=30)
 
             # income button
-            income_button = ttk.Button(main_frame, text='Income', command=addIncome) # TODO : define the command of the button 
-            income_button.grid(column=0, row=8, sticky=tk.S, columnspan=4, padx=5, pady=5)
+            income_button = ttk.Button(main_frame, text='Income', command=addIncome) 
+            income_button.grid(column=0, row=9, sticky=tk.S, columnspan=2, padx=5, pady=1)
 
         ####################### PROJECTS #######################
         def showProjects():
