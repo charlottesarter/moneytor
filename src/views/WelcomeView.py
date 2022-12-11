@@ -50,7 +50,7 @@ class RegisterView():
 
                 # We add a new user
                 model.addUser(str(self.username) + ',' + str(self.password) + ',' + str(self.prefered_currency))
-                model.setUserLogged(self.username)
+                model.setUserLogged(str(self.username), str(self.password), str(self.prefered_currency))
 
                 # Destroy register frame
                 frame_register.destroy()
@@ -164,7 +164,7 @@ class LoginView():
                 if user.username == self.username and user.password == self.password:
                     
                     showLoginSuccess()
-                    model.setUserLogged(self.username)
+                    model.setUserLogged(self.username, self.password, user.prefered_currency)
 
                     # Destroy login frame
                     frame_login.destroy()
