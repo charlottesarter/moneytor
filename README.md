@@ -5,9 +5,6 @@
 > Moneytor = 'Money' + 'to monitor'
 
 #TODO: delete the skip function on the welcome screen
-#TODO: readme überarbeiten
-#TODO. achsenbeschreiftung der plots--> nicht eur sondern pref_curr
-#TODO: trasfer the currency to pref_curr in the visualize list
 
 Moneytor is an open source software designed to help people manage their finances. The user can put in all of his/her expenses and incomes and sort them based on different parameters.
 Moneytor provides multiple ways to visualize the finances. The user can play with different filters to better analyze his/her finances.
