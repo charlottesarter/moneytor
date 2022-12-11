@@ -39,8 +39,8 @@ We managed to implement **most of the features** that we wanted to have for our 
 #### What we did not manage to do
 
 - Update or delete existing data: for now, you can only add a transaction
-- One transaction file per user: it was really long to create a transaction file with sample data, so we did only one transaction file that we are using for all of the users
-> If you logg in as a different user, it will only change the preferred currency but not the displayed data. Due to time constraints, we have decided to leave it at that, as we are mainly focuesed on **demonstrating the features** of our program.
+- One transaction file per user: it took really long to create a transaction file with sample data, so we did only one transaction file that we are using for all of the users
+> If you log in as a different user, it will only change the preferred currency but not the displayed data. Due to time constraints, we have decided to leave it at that, as we are mainly focuesed on **demonstrating the features** of our program.
 
 > Our only issue was a **lack of time** ⌛
 
@@ -53,7 +53,7 @@ We managed to implement **most of the features** that we wanted to have for our 
 ## Ideas of improvement
 
 - Provide more plots for data visualization and analysis
-  - For example a line chart that displays all of the expenses by month for all of the years 
+  - For example a line chart that displays all of the expenses by month for all of the years in one plot to compare them
 - Provide more filters to display more precise and customized plots
 
 ## Authors 
