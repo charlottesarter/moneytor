@@ -32,6 +32,8 @@ The data is stored in a .csv spreadsheet, and is managed via the interface of ou
 > Our goal is to implement a maximum of our ideas.\
 > Our first ideas for the design can be seen in the images folder.
 
+If you want to find out more about our application and how to use it we recommend the [Wiki](https://github.com/charlottesarter/moneytor/wiki).
+
 ## What we did for the term project? 
 
 We managed to implement **most of the features** that we wanted to have for our application, and a little bit more :)
@@ -56,6 +58,7 @@ We managed to implement **most of the features** that we wanted to have for our 
   - For example a line chart that displays all of the expenses by month for all of the years in one plot to compare them
 - Provide more filters to display more precise and customized plots
 - better verify the user's input (that is easy to do but just takes time)
+- make the interface more appealing
 
 ## Authors 
 
