@@ -14,6 +14,44 @@ class Project:
 
     def getKeyInfo(self):
 
+        def getRate(from_currency, to_currency):
+
+            # EUR
+            if from_currency == 'EUR' and to_currency == 'EUR':
+                return 1
+            elif from_currency == 'EUR' and to_currency == 'KRW':
+                return 1369.54
+            elif from_currency == 'EUR' and to_currency == 'USD':
+                return 1.05
+
+            # KRW
+            elif from_currency == 'KRW' and to_currency == 'EUR':
+                return 0.00073
+            elif from_currency == 'KRW' and to_currency == 'KRW':
+                return 1
+            elif from_currency == 'KRW' and to_currency == 'USD':
+                return 0.000767
+
+            # USD
+            elif from_currency == 'USD' and to_currency == 'EUR':
+                return 0.95
+            elif from_currency == 'USD' and to_currency == 'KRW':
+                return 1302.37
+            elif from_currency == 'USD' and to_currency == 'USD':
+                return 1
+
+        def getCurrencyName(currency):
+
+            if(int(currency) == Currency['KRW'].value):
+                return 'KRW'
+            elif(int(currency) == Currency['USD'].value):
+                return 'USD'
+            elif(int(currency) == Currency['EUR'].value):
+                return 'EUR'
+            else:
+                print('Preferred currency not found')
+                return 0
+
         key_info = []
         cr = CurrencyRates()
 
@@ -23,18 +61,9 @@ class Project:
         line = fd.read()
         user_info = line.split(',')
 
-        prefered_currency = user_info[2]
+        prefered_currency = getCurrencyName(user_info[2])
 
         fd.close()
-
-        if(int(prefered_currency) == Currency['KRW'].value):
-            prefered_currency = 'KRW'
-        elif(int(prefered_currency) == Currency['USD'].value):
-            prefered_currency = 'USD'
-        elif(int(prefered_currency) == Currency['EUR'].value):
-            prefered_currency = 'EUR'
-        else:
-            print('Preferred currency not found')
 
         # 1st info : the name of the project
         key_info.append(self.name)
@@ -44,15 +73,12 @@ class Project:
         for transaction in self.transactions:
             
             # Get the transaction currency
-            if(int(transaction.currency) == Currency['KRW'].value):
-                trans_currency = 'KRW'
-            elif(int(transaction.currency) == Currency['USD'].value):
-                trans_currency = 'USD'
-            elif(int(transaction.currency) == Currency['EUR'].value):
-                trans_currency = 'EUR'
+            trans_currency = getCurrencyName(transaction.currency)
+
+            rate = getRate(trans_currency, prefered_currency)
 
             if transaction.expense == 'True':
-                total_expenses += cr.convert(trans_currency, prefered_currency, float(transaction.amount))
+                total_expenses += float(transaction.amount) * rate
 
         key_info.append(round(total_expenses, 2))
 
@@ -61,15 +87,12 @@ class Project:
         for transaction in self.transactions:
 
             # Get the transaction currency
-            if(int(transaction.currency) == Currency['KRW'].value):
-                trans_currency = 'KRW'
-            elif(int(transaction.currency) == Currency['USD'].value):
-                trans_currency = 'USD'
-            elif(int(transaction.currency) == Currency['EUR'].value):
-                trans_currency = 'EUR'
+            trans_currency = getCurrencyName(transaction.currency)
+
+            rate = getRate(trans_currency, prefered_currency)
 
             if transaction.expense == 'False':
-                total_incomes += cr.convert(trans_currency, prefered_currency, float(transaction.amount))
+                total_incomes += float(transaction.amount) * rate
 
         key_info.append(round(total_incomes, 2))
 
@@ -79,4 +102,9 @@ class Project:
         key_info.append(round(sold, 2))
 
         return key_info
+    
+
+
+
+        
 
