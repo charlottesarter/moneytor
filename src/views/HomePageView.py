@@ -335,8 +335,21 @@ class HomePageView():
             for widget in main_frame.winfo_children():
                 widget.destroy()
                 
-            label_amount = ttk.Label(main_frame, text='About')
-            label_amount.grid(column=2, row=3, sticky=tk.N, padx=5, pady=5)
+            about_text1 = 'Welcome to our young startup! We created an application to help you manage and organize your finances.\nOur app, Moneytor, allows you to easily track your expenses and see where your money is going. \nWith Moneytor, you can set budgets, see your spending habits, and stay on top of your financial goals. \nWhether you are trying to save money, pay off debt, or just want to gain control of your finances, Moneytor is here to help. \nGive it a try and see how easy it is to take control of your money with our app.'
+            label_about1 = ttk.Label(main_frame, text=about_text1)
+            label_about1.grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)
+            
+            about_text2 = 'Our team consists of two members who are passionate about helping people take control of their finances. \nBoth of us have experience in the finance industry and have a deep understanding of the challenges that come with managing money. \nWe created Moneytor because we saw a need for a simple and effective way to track expenses and stay on top of your financial goals. \nWe believe that with the right tools, anyone can master their finances and achieve their financial dreams. \nWe are excited to share our app with you and hope it helps you on your financial journey.'
+            label_about2 = ttk.Label(main_frame, text=about_text2)
+            label_about2.grid(column=0, row=1, sticky=tk.W, padx=5, pady=5)
+            
+            impressum_text = 'Impressum: \nMoneytor is a fictional company created for the purpose of this exercise.\nHeadquarters: London, UK\nContact: info@moneytor.com\nManaging Directors: Charlotte Sarter and Max Eberlein\nRegistration number: 31415926\nVAT number: 27182818\nDisclaimer: Moneytor is not a real company and does not offer any products or services. The information provided in this impressum is for illustrative purposes only.'
+            label_impressum = ttk.Label(main_frame, text=impressum_text)
+            label_impressum.grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+            
+            disclaimer_text = 'The text for this "About" page was generated only using the open AI ChatGPT.\nmore Information: https://chat.openai.com/chat'
+            label_diclaimer = ttk.Label(main_frame, text=disclaimer_text, font=("Arial", 12))
+            label_diclaimer.grid(column=0, row=3, sticky=tk.W, padx=5, pady=5)
 
         ####################### MAIN #######################
 
