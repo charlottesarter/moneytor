@@ -29,7 +29,7 @@ The data is stored in a .csv spreadsheet, and is managed via the interface of ou
 
 - You can create **projects** to organize your expenses (and then set up different settings)
 
-- Data vizualisation (with filters)
+- Data **vizualisation** with different plots (and filters)
 
 > Our goal is to implement a maximum of our ideas.\
 > Our first ideas for the design can be seen in the images folder.
